@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ChessPieces\BlackBishop.png" />
+    <None Remove="ChessPieces\BlackKing.png" />
+    <None Remove="ChessPieces\BlackKnight.png" />
+    <None Remove="ChessPieces\BlackPawn.png" />
+    <None Remove="ChessPieces\BlackQueen.png" />
+    <None Remove="ChessPieces\BlackTower.png" />
+    <None Remove="ChessPieces\WhiteBishop.png" />
+    <None Remove="ChessPieces\WhiteKing.png" />
+    <None Remove="ChessPieces\WhiteKnight.png" />
+    <None Remove="ChessPieces\WhitePawn.png" />
+    <None Remove="ChessPieces\WhiteQueen.png" />
+    <None Remove="ChessPieces\WhiteTower.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MvvmLight" Version="5.4.1.1" />
+    <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="ChessPieces\BlackBishop.png" />
+    <Resource Include="ChessPieces\BlackKing.png" />
+    <Resource Include="ChessPieces\BlackKnight.png" />
+    <Resource Include="ChessPieces\BlackPawn.png" />
+    <Resource Include="ChessPieces\BlackQueen.png" />
+    <Resource Include="ChessPieces\BlackTower.png" />
+    <Resource Include="ChessPieces\WhiteBishop.png" />
+    <Resource Include="ChessPieces\WhiteKing.png" />
+    <Resource Include="ChessPieces\WhiteKnight.png" />
+    <Resource Include="ChessPieces\WhitePawn.png" />
+    <Resource Include="ChessPieces\WhiteQueen.png" />
+    <Resource Include="ChessPieces\WhiteTower.png" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "dgSpecHash": "vKrGRHNp0HJCisGe4u3zBVg37qbyeUQq01IJc8Y+qUggcnIaB+eQ9p/DN8Od2MEs33jPEwIh4/Luzvr+0UpmJQ==",
+  "success": true,
+  "projectFilePath": "D:\\Program (x86)\\GitHub\\Checkers\\Chess\\Chess.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Regnd\\.nuget\\packages\\mvvmlight\\5.4.1.1\\mvvmlight.5.4.1.1.nupkg.sha512",
+    "C:\\Users\\Regnd\\.nuget\\packages\\mvvmlightlibs\\5.4.1.1\\mvvmlightlibs.5.4.1.1.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'MvvmLightLibs 5.4.1.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "libraryId": "MvvmLightLibs",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v3.1"
+      ]
+    }
+  ]
+}
