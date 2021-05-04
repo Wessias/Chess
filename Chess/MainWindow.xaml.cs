@@ -23,6 +23,10 @@ namespace Chess
     {
 
         ObservableCollection<ChessPiece> Pieces { get; set; }
+        public int _row1;
+        public int _row2;
+        public int _col1;
+        public int _col2;
         
         public MainWindow()
         {
@@ -31,7 +35,7 @@ namespace Chess
             DataContext = Pieces;
             CreateBoard();
             NewGame();
-            Pieces.Add(new Pawn() { Row = 2, Column = 5, IsBlack = false });
+            
             //Pieces.Add(new ChessPiece() { Row = 4, Column = 4, Type = ChessPieceTypes.Tower, IsBlack = true });
             //Pieces.Where((x => x.Row == 2)); TESTIGN
         }
@@ -77,12 +81,16 @@ namespace Chess
 
         }
 
+        //https://social.msdn.microsoft.com/Forums/en-US/1e550182-5b7e-4fc1-b8bb-d4de132d3625/how-to-get-the-row-and-column-of-button-clicked-in-the-grid-event-handler?forum=csharpgeneral
+        //https://stackoverflow.com/questions/10041238/how-to-get-row-index-and-column-of-grid-on-button-click
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (sender is Button)
             {
-                var row = Grid.GetRow(sender as Button);
-                var col = Grid.GetColumn(sender as Button);
+                Button btn = sender as Button;
+                 _row2 = Grid.GetRow(btn);
+                _col2 = Grid.GetColumn(btn);
+                FindPiece(0, 1).Move(_row2, _col2);
             }
 
         }
@@ -128,24 +136,26 @@ namespace Chess
 
 
 
-        public int FindPiece(int row, int col)
+        private ChessPiece FindPiece(int row, int col)
         {
             for (int i = 0; i < Pieces.Count; i++)
             {
                 if (row == Pieces.ElementAt(i).Row && col == Pieces.ElementAt(i).Column)
                 {
-                    return i;
+                    return Pieces.ElementAt(i);
                 }
             }
-            return -1;
+            return null;
         }
 
         private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (sender is Image)
             {
-                var row = Grid.GetRow(sender as Image);
-                var col = Grid.GetColumn(sender as Image);
+                Image img = sender as Image;
+                _row1 = (int)img.GetValue(Grid.RowProperty);
+                _col1 = (int)img.GetValue(Grid.ColumnProperty);
+
             }
         }
     }
