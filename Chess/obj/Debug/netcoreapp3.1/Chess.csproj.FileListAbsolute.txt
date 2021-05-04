@@ -22,3 +22,4 @@ D:\Program (x86)\GitHub\Checkers\Chess\obj\Debug\netcoreapp3.1\Chess.csproj.Copy
 D:\Program (x86)\GitHub\Checkers\Chess\obj\Debug\netcoreapp3.1\Chess.dll
 D:\Program (x86)\GitHub\Checkers\Chess\obj\Debug\netcoreapp3.1\Chess.pdb
 D:\Program (x86)\GitHub\Checkers\Chess\obj\Debug\netcoreapp3.1\Chess.genruntimeconfig.cache
+D:\Program (x86)\GitHub\Checkers\Chess\obj\Debug\netcoreapp3.1\Chess.csprojAssemblyReference.cache

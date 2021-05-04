@@ -46,7 +46,7 @@ namespace Chess
 
     public string ImageSource
     {
-        get { return "../ChessPieces/" + (IsBlack ? "Black" : "White") + GetType().Name + ".png"; }
+        get { return "../ChessPieceImages/" + (IsBlack ? "Black" : "White") + GetType().Name + ".png"; }
     }
 }
 }
