@@ -62,7 +62,7 @@ namespace ChessBoard {
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "4.8.1.0")]
         public static void Main() {
-            ChessBoard.App app = new ChessBoard.App();
+            global::ChessBoard.App app = new global::ChessBoard.App();
             app.InitializeComponent();
             app.Run();
         }

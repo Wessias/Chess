@@ -18,9 +18,9 @@ namespace ChessBoard
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ChessBoard : Window
     {
-        public MainWindow()
+        public ChessBoard()
         {
             InitializeComponent();
         }
