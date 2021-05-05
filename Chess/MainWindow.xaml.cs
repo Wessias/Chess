@@ -141,10 +141,10 @@ namespace Chess
                     var rowAndColArray = btnName.Split("_");
                     int desRow = Convert.ToInt32(rowAndColArray[1]);
                     int desCol = Convert.ToInt32(rowAndColArray[2]);
-                    _gameLogic.desiredPos = Tuple.Create(desRow, desCol);
+                    _gameLogic._desiredPos = Tuple.Create(desRow, desCol);
                     _pieceClicked = false;
                     if (true) {
-                        _gameLogic.currentPiece.Move(desRow, desCol);
+                        _gameLogic._currentPiece.Move(desRow, desCol);
                             }
                 }
             }
@@ -160,12 +160,12 @@ namespace Chess
                     ChessPiece clickedPiece = (ChessPiece)img.DataContext;
                     if (_IsBlackTurn && clickedPiece.IsBlack)
                     {
-                        _gameLogic.currentPiece = clickedPiece;
+                        _gameLogic._currentPiece = clickedPiece;
                         _pieceClicked = true;
                     }
-                    else if (!_IsBlackTurn && !(clickedPiece.IsBlack))
+                    else if (!_IsBlackTurn && !(clickedPiece.IsBlack)) //Redundant? Perhaps :p
                     {
-                        _gameLogic.currentPiece = clickedPiece;
+                        _gameLogic._currentPiece = clickedPiece;
                         _pieceClicked = true;
                         _IsBlackTurn = true;
                     }

@@ -11,6 +11,8 @@ namespace Chess
         public ChessPiece _currentPiece;
         public Tuple<int, int> _desiredPos;
 
+
+
         public ChessPiece FindPiece(int row, int col, ObservableCollection<ChessPiece> pieces)
         {
             for (int i = 0; i < pieces.Count; i++)
@@ -31,6 +33,7 @@ namespace Chess
 
             return null;
         }
+
 
 
 
