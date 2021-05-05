@@ -26,7 +26,7 @@ namespace Chess
         private bool _pieceClicked = false;
         private List _allowedMoves;
         private bool _IsBlackTurn = false;
-        Model _gameLogic = new Model();
+        GameLogic _gameLogic = new GameLogic();
         
 
         
