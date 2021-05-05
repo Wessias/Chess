@@ -23,11 +23,10 @@ namespace Chess
     {
 
         ObservableCollection<ChessPiece> Pieces { get; set; }
-        private int _row1;
-        private int _row2;
-        private int _col1;
-        private int _col2;
-        private bool pieceClicked = false;
+        private bool _pieceClicked = false;
+        private List _allowedMoves;
+        private bool _IsBlackTurn = false;
+        Model _gameLogic = new Model();
         
 
         
@@ -118,7 +117,7 @@ namespace Chess
                 {
                     Button button = new Button { BorderThickness = new Thickness(0, 0, 0, 0), Background = isBlack ? blackBrush : whiteBrush };
                     button.Click += Button_Click;
-                    button.Name += "A_" + row.ToString() + "_" + col.ToString();
+                    button.Name += "ABCDEFGHIJKLMNOPQRSTUVWXYZ_" + row.ToString() + "_" + col.ToString();
                     ButtonGrid.Children.Add(button);
                     isBlack = !isBlack;
                 }
@@ -128,33 +127,25 @@ namespace Chess
 
 
 
-        private ChessPiece FindPiece(int row, int col)
-        {
-            for (int i = 0; i < Pieces.Count; i++)
-            {
-                if (row == Pieces.ElementAt(i).Row && col == Pieces.ElementAt(i).Column)
-                {
-                    return Pieces.ElementAt(i);
-                }
-            }
-            return null;
-        }
 
 
         //https://social.msdn.microsoft.com/Forums/en-US/1e550182-5b7e-4fc1-b8bb-d4de132d3625/how-to-get-the-row-and-column-of-button-clicked-in-the-grid-event-handler?forum=csharpgeneral
         //https://stackoverflow.com/questions/10041238/how-to-get-row-index-and-column-of-grid-on-button-click
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (pieceClicked)
+            if (_pieceClicked)
             {
                 if (e.Source is Button btn)
                 {
                     string btnName = btn.Name;
                     var rowAndColArray = btnName.Split("_");
-                    _row2 = Convert.ToInt32(rowAndColArray[1]);
-                    _col2 = Convert.ToInt32(rowAndColArray[2]);
-                    FindPiece(_row1, _col1).Move(_row2, _col2);
-                    pieceClicked = false;
+                    int desRow = Convert.ToInt32(rowAndColArray[1]);
+                    int desCol = Convert.ToInt32(rowAndColArray[2]);
+                    _gameLogic.desiredPos = Tuple.Create(desRow, desCol);
+                    _pieceClicked = false;
+                    if (true) {
+                        _gameLogic.currentPiece.Move(desRow, desCol);
+                            }
                 }
             }
 
@@ -162,18 +153,28 @@ namespace Chess
 
         private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (!pieceClicked)
+            if (!_pieceClicked)
             {
                 if (e.Source is Image img)
                 {
                     ChessPiece clickedPiece = (ChessPiece)img.DataContext;
-                    _row1 = clickedPiece.Row;
-                    _col1 = clickedPiece.Column;
-                    pieceClicked = true;
+                    if (_IsBlackTurn && clickedPiece.IsBlack)
+                    {
+                        _gameLogic.currentPiece = clickedPiece;
+                        _pieceClicked = true;
+                    }
+                    else if (!_IsBlackTurn && !(clickedPiece.IsBlack))
+                    {
+                        _gameLogic.currentPiece = clickedPiece;
+                        _pieceClicked = true;
+                        _IsBlackTurn = true;
+                    }
+                    else _pieceClicked = false;
+
 
                 }
             }
-            else pieceClicked = false;
+            else _pieceClicked = false;
         }
     }
 }

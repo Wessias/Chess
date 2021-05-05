@@ -8,7 +8,8 @@ namespace Chess
 {
     class Model
     {
-        private ChessPiece currentPiece;
+        public ChessPiece currentPiece;
+        public Tuple<int, int> desiredPos;
 
         public ChessPiece FindPiece(int row, int col, ObservableCollection<ChessPiece> pieces)
         {
