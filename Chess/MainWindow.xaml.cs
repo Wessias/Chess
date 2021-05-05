@@ -24,7 +24,7 @@ namespace Chess
 
         ObservableCollection<ChessPiece> Pieces { get; set; }
         private bool _pieceClicked = false;
-        private List _allowedMoves;
+        private List<Tuple<int, int, string>> _allowedMoves;
         private bool _IsBlackTurn = false;
         GameLogic _gameLogic = new GameLogic();
         
@@ -43,12 +43,6 @@ namespace Chess
         }
 
 
-
-        private void OnClick(object sender, EventArgs e)
-        {
-            Pieces.Add(new Pawn() { Row = 3, Column = 4, IsBlack = false });
-        }
-
         private void NewGame()
         {
             Pieces.Clear();
@@ -61,10 +55,10 @@ namespace Chess
             Pieces.Add(new Knight() { Row = 0, Column = 6, IsBlack = true });
             Pieces.Add(new Rook() { Row = 0, Column = 7, IsBlack = true });
 
-            for (var i = 0; i < 8; i++)
-            {
-                Pieces.Add(new Pawn() { Row = 1, Column = i, IsBlack = true });
-            }
+            //for (var i = 0; i < 8; i++)
+            //{
+             //   Pieces.Add(new Pawn() { Row = 1, Column = i, IsBlack = true });
+            //}
 
 
             Pieces.Add(new Rook() { Row = 7, Column = 0, IsBlack = false });
@@ -76,10 +70,10 @@ namespace Chess
             Pieces.Add(new Knight() { Row = 7, Column = 6, IsBlack = false });
             Pieces.Add(new Rook() { Row = 7, Column = 7, IsBlack = false });
 
-            for (var i = 0; i < 8; i++)
-            {
-                Pieces.Add(new Pawn() { Row = 6, Column = i, IsBlack = false });
-            }
+            //for (var i = 0; i < 8; i++)
+            //{
+            //    Pieces.Add(new Pawn() { Row = 6, Column = i, IsBlack = false });
+            //}
 
         }
 
@@ -110,6 +104,7 @@ namespace Chess
             var converter = new BrushConverter();
             var blackBrush = (Brush)converter.ConvertFromString("#b48762");
             var whiteBrush = (Brush)converter.ConvertFromString("#f0d8b5");
+            NameScope.SetNameScope(ButtonGrid, new NameScope());
             for (var row = 0; row < 8; row++)
             {
                 var isBlack = row % 2 == 1;
@@ -117,12 +112,12 @@ namespace Chess
                 {
                     Button button = new Button { BorderThickness = new Thickness(0, 0, 0, 0), Background = isBlack ? blackBrush : whiteBrush };
                     button.Click += Button_Click;
-                    button.Name += "ABCDEFGHIJKLMNOPQRSTUVWXYZ_" + row.ToString() + "_" + col.ToString();
+                    button.Name += "A_" + row.ToString() + "_" + col.ToString();
+                    ButtonGrid.RegisterName(button.Name, button);
                     ButtonGrid.Children.Add(button);
                     isBlack = !isBlack;
                 }
             }
-
         }
 
 
@@ -161,20 +156,38 @@ namespace Chess
                     if (_IsBlackTurn && clickedPiece.IsBlack)
                     {
                         _gameLogic._currentPiece = clickedPiece;
+                        _allowedMoves = _gameLogic.GenerateAllowedMoves(clickedPiece, Pieces);
                         _pieceClicked = true;
+                        _IsBlackTurn = false;
+                        ColorAllowedMoves(_allowedMoves);
+                        
                     }
-                    else if (!_IsBlackTurn && !(clickedPiece.IsBlack)) //Redundant? Perhaps :p
+                    else if (!_IsBlackTurn && !(clickedPiece.IsBlack)) //Reduant else if? Try removing it
                     {
                         _gameLogic._currentPiece = clickedPiece;
+                        _allowedMoves = _gameLogic.GenerateAllowedMoves(clickedPiece, Pieces);
                         _pieceClicked = true;
                         _IsBlackTurn = true;
+                        ColorAllowedMoves(_allowedMoves);
                     }
-                    else _pieceClicked = false;
-
-
                 }
             }
             else _pieceClicked = false;
+        }
+
+
+
+        private void ColorAllowedMoves(List<Tuple<int, int, string>> allowedMoves)
+        {
+            if (allowedMoves.Count > 0)
+            {
+                for (int i = 0; i < allowedMoves.Count(); i++)
+                {
+
+                    Button btn = (Button)ButtonGrid.FindName("A_" + allowedMoves[i].Item1.ToString() + "_" + allowedMoves[i].Item2.ToString());
+                    btn.Background = Brushes.Red;
+                }
+            }
         }
     }
 }
