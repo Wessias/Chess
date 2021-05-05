@@ -6,10 +6,10 @@ using System.Text;
 
 namespace Chess
 {
-    class Model
+    class GameLogic
     {
-        public ChessPiece currentPiece;
-        public Tuple<int, int> desiredPos;
+        public ChessPiece _currentPiece;
+        public Tuple<int, int> _desiredPos;
 
         public ChessPiece FindPiece(int row, int col, ObservableCollection<ChessPiece> pieces)
         {
@@ -20,6 +20,15 @@ namespace Chess
                     return pieces.ElementAt(i);
                 }
             }
+            return null;
+        }
+
+
+
+        public List<Tuple<int, int>> GenerateAllowedMoves(ChessPiece piece)
+        {
+
+
             return null;
         }
 
