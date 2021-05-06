@@ -110,7 +110,7 @@ namespace Chess
                 var isBlack = row % 2 == 1;
                 for (int col = 0; col < 8; col++)
                 {
-                    Button button = new Button { BorderThickness = new Thickness(0, 0, 0, 0), Background = isBlack ? blackBrush : whiteBrush };
+                    Button button = new Button { BorderThickness = new Thickness(0.5, 0.5, 0.5, 0.5), Background = isBlack ? blackBrush : whiteBrush };
                     button.Click += Button_Click;
                     button.Name += "A_" + row.ToString() + "_" + col.ToString();
                     ButtonGrid.RegisterName(button.Name, button);
@@ -216,6 +216,7 @@ namespace Chess
 
                     Button btn = (Button)ButtonGrid.FindName("A_" + allowedMoves[i].Item1.ToString() + "_" + allowedMoves[i].Item2.ToString());
                     btn.Background = Brushes.Red;
+                    btn.Opacity = 0.7;
                 }
             }
         }
@@ -233,6 +234,7 @@ namespace Chess
                     var isBlack = (allowedMoves[i].Item1 + allowedMoves[i].Item2) % 2 == 1;
                     Button btn = (Button)ButtonGrid.FindName("A_" + allowedMoves[i].Item1.ToString() + "_" + allowedMoves[i].Item2.ToString());
                     btn.Background = isBlack ? blackBrush : whiteBrush;
+                    btn.Opacity = 1;
                 }
             }
         }

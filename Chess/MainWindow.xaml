@@ -13,7 +13,7 @@
     </Window.Resources>
 
     <Grid>
-        <UniformGrid Rows="8" Columns="8" Opacity="1" DataContext="MainWindow" Name="ButtonGrid">
+        <UniformGrid Rows="8" Columns="8" Opacity="1" DataContext="MainWindow" Name="ButtonGrid" Background="DimGray">
             
         </UniformGrid>
 
