@@ -24,7 +24,7 @@ namespace Chess
 
         ObservableCollection<ChessPiece> Pieces { get; set; }
         private bool _pieceClicked = false;
-        private List<Tuple<int, int, string>> _allowedMoves;
+        private List<Tuple<int, int>> _allowedMoves;
         private bool _IsBlackTurn = false;
         GameLogic _gameLogic = new GameLogic();
         
@@ -138,11 +138,19 @@ namespace Chess
                     int desCol = Convert.ToInt32(rowAndColArray[2]);
                     _gameLogic._desiredPos = Tuple.Create(desRow, desCol);
                     _pieceClicked = false;
-                    if (true) {
-                        _gameLogic._currentPiece.Move(desRow, desCol);
-                        OriginalBoard(_allowedMoves);
-                        _IsBlackTurn = !_IsBlackTurn;
-                            }
+
+
+                    if (_gameLogic.CheckIfDesiredPosIsInAllowedMoves(desRow, desCol, _allowedMoves)) {
+
+                                _gameLogic._currentPiece.Move(desRow, desCol);
+                                RestoreOriginalBoard(_allowedMoves);
+                                _IsBlackTurn = !_IsBlackTurn;
+                               
+                    }
+                    else
+                    {
+                        RestoreOriginalBoard(_allowedMoves);
+                    }
                 }
             }
 
@@ -163,7 +171,7 @@ namespace Chess
                         ColorAllowedMoves(_allowedMoves);
                         
                     }
-                    else if (!(clickedPiece.IsBlack)) 
+                    else if (!_IsBlackTurn && !(clickedPiece.IsBlack)) //Redundant? BIATCH TRY REMOVING IT
                     {
                         _gameLogic._currentPiece = clickedPiece;
                         _allowedMoves = _gameLogic.GenerateAllowedMoves(clickedPiece, Pieces);
@@ -172,12 +180,34 @@ namespace Chess
                     }
                 }
             }
+            else if (_pieceClicked) //Capture
+            {
+                if (e.Source is Image img)
+                {
+                    ChessPiece secondClickedPiece = (ChessPiece)img.DataContext;
+                    if (secondClickedPiece.IsBlack != _gameLogic._currentPiece.IsBlack)
+                    {
+                        if (_gameLogic.CheckIfDesiredPosIsInAllowedMoves(secondClickedPiece.Row, secondClickedPiece.Column, _allowedMoves))
+                        {
+
+                            var tempRow = secondClickedPiece.Row;
+                            var tempCol = secondClickedPiece.Column;
+
+                            Pieces.Remove(secondClickedPiece);
+                            RestoreOriginalBoard(_allowedMoves);
+                            _gameLogic._currentPiece.Move(tempRow, tempCol);
+                            _IsBlackTurn = !_IsBlackTurn;
+                            _pieceClicked = false;
+                        }
+                    }
+                }
+            }
             else _pieceClicked = false;
         }
 
 
         //Def not a control
-        private void ColorAllowedMoves(List<Tuple<int, int, string>> allowedMoves)
+        private void ColorAllowedMoves(List<Tuple<int, int>> allowedMoves)
         {
             if (allowedMoves.Count > 0)
             {
@@ -191,7 +221,7 @@ namespace Chess
         }
 
 
-        private void OriginalBoard(List<Tuple<int, int, string>> allowedMoves)
+        private void RestoreOriginalBoard(List<Tuple<int, int>> allowedMoves)
         {
             var converter = new BrushConverter();
             var blackBrush = (Brush)converter.ConvertFromString("#b48762");

@@ -44,7 +44,7 @@ namespace Chess
 
 
 
-        public List<Tuple<int, int, string>> GenerateAllowedMoves(ChessPiece piece, ObservableCollection<ChessPiece> pieces)
+        public List<Tuple<int, int>> GenerateAllowedMoves(ChessPiece piece, ObservableCollection<ChessPiece> pieces)
         {
             switch (_currentPiece.GetType().Name)
             {
@@ -75,7 +75,7 @@ namespace Chess
         }
 
 
-        public bool CheckIfDesiredPosIsInAllowedMoves(int desRow, int desCol, List<Tuple<int, int, string>> allowedMoves)
+        public bool CheckIfDesiredPosIsInAllowedMoves(int desRow, int desCol, List<Tuple<int, int>> allowedMoves)
         {
 
             for (int i = 0; i < allowedMoves.Count(); i++)
@@ -89,9 +89,23 @@ namespace Chess
         }
 
 
-        private List<Tuple<int, int, string>> GenerateRookMoves(ChessPiece piece, ObservableCollection<ChessPiece> pieces)
+        //USELESS
+        public string CheckCaptureOrNotCapture(int desRow, int desCol, List<Tuple<int, int, string>> allowedMoves) {
+            
+            for (int i = 0; i < allowedMoves.Count(); i++)
+            {
+                if (desRow == allowedMoves[i].Item1 && desCol == allowedMoves[i].Item2)
+                {
+                    return allowedMoves[i].Item3;
+                }
+            }
+            return null;
+        }
+
+
+        private List<Tuple<int, int>> GenerateRookMoves(ChessPiece piece, ObservableCollection<ChessPiece> pieces)
         {
-            List<Tuple<int, int, string>> rookMoves = new List<Tuple<int, int, string>>();
+            List<Tuple<int, int>> rookMoves = new List<Tuple<int, int>>();
 
             for (int i = 0; i <= 4; i++)
             {
@@ -103,11 +117,11 @@ namespace Chess
                         {
                             if (!IsChessPieceHere(j, piece.Column, pieces))
                             {
-                                rookMoves.Add(Tuple.Create(j, piece.Column, "notCapture"));
+                                rookMoves.Add(Tuple.Create(j, piece.Column));
                             }
                             else if (FindPiece(j, piece.Column, pieces).IsBlack == !piece.IsBlack)
                             {
-                                rookMoves.Add(Tuple.Create(j, piece.Column, "Capture"));
+                                rookMoves.Add(Tuple.Create(j, piece.Column));
                                 break;
                             }
                             else
@@ -123,11 +137,11 @@ namespace Chess
                         {
                             if (!IsChessPieceHere(j, piece.Column, pieces))
                             {
-                                rookMoves.Add(Tuple.Create(j, piece.Column, "notCapture"));
+                                rookMoves.Add(Tuple.Create(j, piece.Column));
                             }
                             else if (FindPiece(j, piece.Column, pieces).IsBlack == !piece.IsBlack)
                             {
-                                rookMoves.Add(Tuple.Create(j, piece.Column, "Capture"));
+                                rookMoves.Add(Tuple.Create(j, piece.Column));
                                 break;
                             }
                             else
@@ -143,11 +157,11 @@ namespace Chess
                         {
                             if (!IsChessPieceHere(piece.Row, j, pieces))
                             {
-                                rookMoves.Add(Tuple.Create(piece.Row, j, "notCapture"));
+                                rookMoves.Add(Tuple.Create(piece.Row, j));
                             }
                             else if (FindPiece(piece.Row, j, pieces).IsBlack == !piece.IsBlack)
                             {
-                                rookMoves.Add(Tuple.Create(piece.Row, j, "Capture"));
+                                rookMoves.Add(Tuple.Create(piece.Row, j));
                                 break;
                             }
                             else
@@ -164,11 +178,11 @@ namespace Chess
                         {
                             if (!IsChessPieceHere(piece.Row, j, pieces))
                             {
-                                rookMoves.Add(Tuple.Create(piece.Row, j, "notCapture"));
+                                rookMoves.Add(Tuple.Create(piece.Row, j));
                             }
                             else if (FindPiece(piece.Row, j, pieces).IsBlack == !piece.IsBlack)
                             {
-                                rookMoves.Add(Tuple.Create(piece.Row, j, "Capture"));
+                                rookMoves.Add(Tuple.Create(piece.Row, j));
                                 break;
                             }
                             else
@@ -189,23 +203,23 @@ namespace Chess
             return rookMoves;
         }
 
-        private List<Tuple<int, int, string>> GenerateKnightMoves(ChessPiece piece)
-        {
-            return null;
-        }
-        private List<Tuple<int, int, string>> GenerateBishopMoves(ChessPiece piece)
-        {
-            return null;
-        }
-        private List<Tuple<int, int, string>> GenerateKingMoves(ChessPiece piece)
-        {
-            return null;
-        }
-        private List<Tuple<int, int, string>> GenerateQueenMoves(ChessPiece piece)
-        {
-            return null;
-        }
-        private List<Tuple<int, int, string>> GeneratePawnMoves(ChessPiece piece)
+        private List<Tuple<int, int>> GenerateKnightMoves(ChessPiece piece)
+        {                          
+            return null;           
+        }                          
+        private List<Tuple<int, int>> GenerateBishopMoves(ChessPiece piece)
+        {                          
+            return null;           
+        }                          
+        private List<Tuple<int, int>> GenerateKingMoves(ChessPiece piece)
+        {                          
+            return null;           
+        }                          
+        private List<Tuple<int, int>> GenerateQueenMoves(ChessPiece piece)
+        {                          
+            return null;           
+        }                          
+        private List<Tuple<int, int>> GeneratePawnMoves(ChessPiece piece)
         {
             return null;
 
