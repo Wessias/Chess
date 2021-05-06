@@ -213,20 +213,18 @@ namespace Chess
                 {
                     //NORTHWEST
                     case 0:
-                        /*
+                        
                         if (piece.Row - 2 >= _minRow && piece.Column - 1 >= _minCol)
                         {
                             if (!IsChessPieceHere(piece.Row - 2, piece.Column - 1, pieces))
                             {
                                 knightMoves.Add(Tuple.Create(piece.Row - 2, piece.Column - 1));
+                                
                             }
                             else if (FindPiece(piece.Row - 2, piece.Column - 1, pieces).IsBlack != piece.IsBlack)
                             {
                                 knightMoves.Add(Tuple.Create(piece.Row - 2, piece.Column - 1));
-                            }
-                            else
-                            {
-                                return null;
+                                
                             }
                         }
                         
@@ -241,17 +239,10 @@ namespace Chess
                             {
                                 knightMoves.Add(Tuple.Create(piece.Row - 1, piece.Column - 2));
                             }
-                            else
-                            {
-                                return null;
-                            }
-                        }
-                        else { 
-                            return null; 
-                        }
-                        */
 
-                        return knightMoves;
+                        }
+                        break;
+
 
                     //NORTHEAST
                     case 1:
@@ -276,6 +267,7 @@ namespace Chess
                         return knightMoves;
                 }
             }
+            return knightMoves;
         }
 
 
