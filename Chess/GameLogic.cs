@@ -49,22 +49,22 @@ namespace Chess
             switch (_currentPiece.GetType().Name)
             {
                 case "Pawn":
-                    return GeneratePawnMoves(piece);
+                    return GeneratePawnMoves(piece, pieces);
 
                 case "Knight":
-                    return GenerateKnightMoves(piece);
+                    return GenerateKnightMoves(piece, pieces);
 
                 case "Bishop":
-                    return GenerateBishopMoves(piece);
+                    return GenerateBishopMoves(piece, pieces);
 
                 case "Rook":
                     return GenerateRookMoves(piece, pieces);
 
                 case "Queen":
-                    return GenerateQueenMoves(piece);
+                    return GenerateQueenMoves(piece, pieces);
 
                 case "King":
-                    return GenerateKingMoves(piece);
+                    return GenerateKingMoves(piece, pieces);
 
                 default:
                     _currentPiece.Move(7, 7);
@@ -80,7 +80,7 @@ namespace Chess
 
             for (int i = 0; i < allowedMoves.Count(); i++)
             {
-                if( desRow == allowedMoves[i].Item1 && desCol == allowedMoves[i].Item2)
+                if (desRow == allowedMoves[i].Item1 && desCol == allowedMoves[i].Item2)
                 {
                     return true;
                 }
@@ -91,7 +91,7 @@ namespace Chess
 
         //USELESS
         public string CheckCaptureOrNotCapture(int desRow, int desCol, List<Tuple<int, int, string>> allowedMoves) {
-            
+
             for (int i = 0; i < allowedMoves.Count(); i++)
             {
                 if (desRow == allowedMoves[i].Item1 && desCol == allowedMoves[i].Item2)
@@ -203,35 +203,100 @@ namespace Chess
             return rookMoves;
         }
 
-        private List<Tuple<int, int>> GenerateKnightMoves(ChessPiece piece)
-        {                          
-            return null;           
-        }                          
-        private List<Tuple<int, int>> GenerateBishopMoves(ChessPiece piece)
-        {                          
-            return null;           
-        }                          
-        private List<Tuple<int, int>> GenerateKingMoves(ChessPiece piece)
-        {                          
-            return null;           
-        }                          
-        private List<Tuple<int, int>> GenerateQueenMoves(ChessPiece piece)
-        {                          
-            return null;           
-        }                          
-        private List<Tuple<int, int>> GeneratePawnMoves(ChessPiece piece)
+        private List<Tuple<int, int>> GenerateKnightMoves(ChessPiece piece, ObservableCollection<ChessPiece> pieces)
         {
-            return null;
+            List<Tuple<int, int>> knightMoves = new List<Tuple<int, int>>();
 
+            for (int k = 0; k <= 4; k++)
+            {
+                switch (k)
+                {
+                    //NORTHWEST
+                    case 0:
+                        /*
+                        if (piece.Row - 2 >= _minRow && piece.Column - 1 >= _minCol)
+                        {
+                            if (!IsChessPieceHere(piece.Row - 2, piece.Column - 1, pieces))
+                            {
+                                knightMoves.Add(Tuple.Create(piece.Row - 2, piece.Column - 1));
+                            }
+                            else if (FindPiece(piece.Row - 2, piece.Column - 1, pieces).IsBlack != piece.IsBlack)
+                            {
+                                knightMoves.Add(Tuple.Create(piece.Row - 2, piece.Column - 1));
+                            }
+                            else
+                            {
+                                return null;
+                            }
+                        }
+                        
+
+                        if (piece.Row - 1 >= _minRow && piece.Column - 2 >= _minCol)
+                        {
+                            if (!IsChessPieceHere(piece.Row - 1, piece.Column - 2, pieces))
+                            {
+                                knightMoves.Add(Tuple.Create(piece.Row - 1, piece.Column - 2));
+                            }
+                            else if (FindPiece(piece.Row - 2, piece.Column - 1, pieces).IsBlack != piece.IsBlack)
+                            {
+                                knightMoves.Add(Tuple.Create(piece.Row - 1, piece.Column - 2));
+                            }
+                            else
+                            {
+                                return null;
+                            }
+                        }
+                        else { 
+                            return null; 
+                        }
+                        */
+
+                        return knightMoves;
+
+                    //NORTHEAST
+                    case 1:
+
+                        return knightMoves;
+
+                    //SOUTHWEST
+                    case 2:
+
+                        return knightMoves;
+
+                    //SOUTHEAST
+                    case 3:
+
+                        return knightMoves;
+
+
+                    case 4:
+                        return knightMoves;
+
+                    default:
+                        return knightMoves;
+                }
+            }
         }
 
 
 
 
+        private List<Tuple<int, int>> GenerateBishopMoves(ChessPiece piece, ObservableCollection<ChessPiece> pieces)
+        {
+            return null;
+        }
+        private List<Tuple<int, int>> GenerateKingMoves(ChessPiece piece, ObservableCollection<ChessPiece> pieces)
+        {
+            return null;
+        }
+        private List<Tuple<int, int>> GenerateQueenMoves(ChessPiece piece, ObservableCollection<ChessPiece> pieces)
+        {
+            return null;
+        }
+        private List<Tuple<int, int>> GeneratePawnMoves(ChessPiece piece, ObservableCollection<ChessPiece> pieces)
+        {
+            return null;
 
-
-
-
-
-    }
+        }
+    }  
 }
