@@ -235,7 +235,7 @@ namespace Chess
                             {
                                 knightMoves.Add(Tuple.Create(piece.Row - 1, piece.Column - 2));
                             }
-                            else if (FindPiece(piece.Row - 2, piece.Column - 1, pieces).IsBlack != piece.IsBlack)
+                            else if (FindPiece(piece.Row - 1, piece.Column - 2, pieces).IsBlack != piece.IsBlack)
                             {
                                 knightMoves.Add(Tuple.Create(piece.Row - 1, piece.Column - 2));
                             }
@@ -247,17 +247,98 @@ namespace Chess
                     //NORTHEAST
                     case 1:
 
-                        return knightMoves;
+                        if (piece.Row - 2 >= _minRow && piece.Column + 1 <= _maxCol)
+                        {
+                            if (!IsChessPieceHere(piece.Row - 2, piece.Column + 1, pieces))
+                            {
+                                knightMoves.Add(Tuple.Create(piece.Row - 2, piece.Column + 1));
+
+                            }
+                            else if (FindPiece(piece.Row - 2, piece.Column + 1, pieces).IsBlack != piece.IsBlack)
+                            {
+                                knightMoves.Add(Tuple.Create(piece.Row - 2, piece.Column + 1));
+
+                            }
+                        }
+
+
+                        if (piece.Row - 1 >= _minRow && piece.Column + 2 <= _maxCol)
+                        {
+                            if (!IsChessPieceHere(piece.Row - 1, piece.Column + 2, pieces))
+                            {
+                                knightMoves.Add(Tuple.Create(piece.Row - 1, piece.Column + 2));
+                            }
+                            else if (FindPiece(piece.Row - 1, piece.Column + 2, pieces).IsBlack != piece.IsBlack)
+                            {
+                                knightMoves.Add(Tuple.Create(piece.Row - 1, piece.Column + 2));
+                            }
+
+                        }
+                        break;
 
                     //SOUTHWEST
                     case 2:
 
-                        return knightMoves;
+                        if (piece.Row + 2 <= _maxRow && piece.Column - 1 >= _minCol)
+                        {
+                            if (!IsChessPieceHere(piece.Row + 2, piece.Column - 1, pieces))
+                            {
+                                knightMoves.Add(Tuple.Create(piece.Row + 2, piece.Column - 1));
+
+                            }
+                            else if (FindPiece(piece.Row + 2, piece.Column - 1, pieces).IsBlack != piece.IsBlack)
+                            {
+                                knightMoves.Add(Tuple.Create(piece.Row + 2, piece.Column - 1));
+
+                            }
+                        }
+
+
+                        if (piece.Row + 1 <= _maxRow && piece.Column - 2 >= _minCol)
+                        {
+                            if (!IsChessPieceHere(piece.Row + 1, piece.Column - 2, pieces))
+                            {
+                                knightMoves.Add(Tuple.Create(piece.Row + 1, piece.Column - 2));
+                            }
+                            else if (FindPiece(piece.Row + 1, piece.Column - 2, pieces).IsBlack != piece.IsBlack)
+                            {
+                                knightMoves.Add(Tuple.Create(piece.Row + 1, piece.Column - 2));
+                            }
+
+                        }
+                        break;
 
                     //SOUTHEAST
                     case 3:
 
-                        return knightMoves;
+                        if (piece.Row + 2 <= _maxRow && piece.Column + 1 <= _maxCol)
+                        {
+                            if (!IsChessPieceHere(piece.Row + 2, piece.Column + 1, pieces))
+                            {
+                                knightMoves.Add(Tuple.Create(piece.Row + 2, piece.Column + 1));
+
+                            }
+                            else if (FindPiece(piece.Row + 2, piece.Column + 1, pieces).IsBlack != piece.IsBlack)
+                            {
+                                knightMoves.Add(Tuple.Create(piece.Row + 2, piece.Column + 1));
+
+                            }
+                        }
+
+
+                        if (piece.Row + 1 <= _maxRow && piece.Column + 2 <= _maxCol)
+                        {
+                            if (!IsChessPieceHere(piece.Row + 1, piece.Column + 2, pieces))
+                            {
+                                knightMoves.Add(Tuple.Create(piece.Row + 1, piece.Column + 2));
+                            }
+                            else if (FindPiece(piece.Row + 1, piece.Column + 2, pieces).IsBlack != piece.IsBlack)
+                            {
+                                knightMoves.Add(Tuple.Create(piece.Row + 1, piece.Column + 2));
+                            }
+
+                        }
+                        break;
 
 
                     case 4:

@@ -23,3 +23,28 @@ D:\Program (x86)\GitHub\Checkers\Chess\obj\Debug\netcoreapp3.1\Chess.dll
 D:\Program (x86)\GitHub\Checkers\Chess\obj\Debug\netcoreapp3.1\Chess.pdb
 D:\Program (x86)\GitHub\Checkers\Chess\obj\Debug\netcoreapp3.1\Chess.genruntimeconfig.cache
 D:\Program (x86)\GitHub\Checkers\Chess\obj\Debug\netcoreapp3.1\Chess.csprojAssemblyReference.cache
+C:\Users\Hedda\Documents\GitHub\Checkers\Chess\bin\Debug\netcoreapp3.1\Chess.exe
+C:\Users\Hedda\Documents\GitHub\Checkers\Chess\bin\Debug\netcoreapp3.1\Chess.deps.json
+C:\Users\Hedda\Documents\GitHub\Checkers\Chess\bin\Debug\netcoreapp3.1\Chess.runtimeconfig.json
+C:\Users\Hedda\Documents\GitHub\Checkers\Chess\bin\Debug\netcoreapp3.1\Chess.runtimeconfig.dev.json
+C:\Users\Hedda\Documents\GitHub\Checkers\Chess\bin\Debug\netcoreapp3.1\Chess.dll
+C:\Users\Hedda\Documents\GitHub\Checkers\Chess\bin\Debug\netcoreapp3.1\Chess.pdb
+C:\Users\Hedda\Documents\GitHub\Checkers\Chess\bin\Debug\netcoreapp3.1\GalaSoft.MvvmLight.Extras.dll
+C:\Users\Hedda\Documents\GitHub\Checkers\Chess\bin\Debug\netcoreapp3.1\GalaSoft.MvvmLight.Platform.dll
+C:\Users\Hedda\Documents\GitHub\Checkers\Chess\bin\Debug\netcoreapp3.1\GalaSoft.MvvmLight.dll
+C:\Users\Hedda\Documents\GitHub\Checkers\Chess\bin\Debug\netcoreapp3.1\System.Windows.Interactivity.dll
+C:\Users\Hedda\Documents\GitHub\Checkers\Chess\obj\Debug\netcoreapp3.1\Chess.csprojAssemblyReference.cache
+C:\Users\Hedda\Documents\GitHub\Checkers\Chess\obj\Debug\netcoreapp3.1\MainWindow.g.cs
+C:\Users\Hedda\Documents\GitHub\Checkers\Chess\obj\Debug\netcoreapp3.1\App.g.cs
+C:\Users\Hedda\Documents\GitHub\Checkers\Chess\obj\Debug\netcoreapp3.1\GeneratedInternalTypeHelper.g.cs
+C:\Users\Hedda\Documents\GitHub\Checkers\Chess\obj\Debug\netcoreapp3.1\Chess_MarkupCompile.cache
+C:\Users\Hedda\Documents\GitHub\Checkers\Chess\obj\Debug\netcoreapp3.1\Chess_MarkupCompile.lref
+C:\Users\Hedda\Documents\GitHub\Checkers\Chess\obj\Debug\netcoreapp3.1\MainWindow.baml
+C:\Users\Hedda\Documents\GitHub\Checkers\Chess\obj\Debug\netcoreapp3.1\Chess.g.resources
+C:\Users\Hedda\Documents\GitHub\Checkers\Chess\obj\Debug\netcoreapp3.1\Chess.AssemblyInfoInputs.cache
+C:\Users\Hedda\Documents\GitHub\Checkers\Chess\obj\Debug\netcoreapp3.1\Chess.AssemblyInfo.cs
+C:\Users\Hedda\Documents\GitHub\Checkers\Chess\obj\Debug\netcoreapp3.1\Chess.csproj.CoreCompileInputs.cache
+C:\Users\Hedda\Documents\GitHub\Checkers\Chess\obj\Debug\netcoreapp3.1\Chess.csproj.CopyComplete
+C:\Users\Hedda\Documents\GitHub\Checkers\Chess\obj\Debug\netcoreapp3.1\Chess.dll
+C:\Users\Hedda\Documents\GitHub\Checkers\Chess\obj\Debug\netcoreapp3.1\Chess.pdb
+C:\Users\Hedda\Documents\GitHub\Checkers\Chess\obj\Debug\netcoreapp3.1\Chess.genruntimeconfig.cache

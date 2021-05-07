@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Program (x86)\\GitHub\\Checkers\\Chess\\Chess.csproj": {}
+    "C:\\Users\\Hedda\\Documents\\GitHub\\Checkers\\Chess\\Chess.csproj": {}
   },
   "projects": {
-    "D:\\Program (x86)\\GitHub\\Checkers\\Chess\\Chess.csproj": {
+    "C:\\Users\\Hedda\\Documents\\GitHub\\Checkers\\Chess\\Chess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Program (x86)\\GitHub\\Checkers\\Chess\\Chess.csproj",
+        "projectUniqueName": "C:\\Users\\Hedda\\Documents\\GitHub\\Checkers\\Chess\\Chess.csproj",
         "projectName": "Chess",
-        "projectPath": "D:\\Program (x86)\\GitHub\\Checkers\\Chess\\Chess.csproj",
-        "packagesPath": "C:\\Users\\Regnd\\.nuget\\packages\\",
-        "outputPath": "D:\\Program (x86)\\GitHub\\Checkers\\Chess\\obj\\",
+        "projectPath": "C:\\Users\\Hedda\\Documents\\GitHub\\Checkers\\Chess\\Chess.csproj",
+        "packagesPath": "C:\\Users\\Hedda\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Hedda\\Documents\\GitHub\\Checkers\\Chess\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Regnd\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Hedda\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,6 +26,7 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -37,6 +38,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "MvvmLight": {
               "target": "Package",
@@ -65,7 +67,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.408\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }
