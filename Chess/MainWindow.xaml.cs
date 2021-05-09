@@ -55,10 +55,10 @@ namespace Chess
             Pieces.Add(new Knight() { Row = 0, Column = 6, IsBlack = true });
             Pieces.Add(new Rook() { Row = 0, Column = 7, IsBlack = true });
 
-            //for (var i = 0; i < 8; i++)
-            //{
-             //   Pieces.Add(new Pawn() { Row = 1, Column = i, IsBlack = true });
-            //}
+            for (var i = 0; i < 8; i++)
+            {
+                Pieces.Add(new Pawn() { Row = 1, Column = i, IsBlack = true });
+            }
 
 
             Pieces.Add(new Rook() { Row = 7, Column = 0, IsBlack = false });
@@ -70,12 +70,12 @@ namespace Chess
             Pieces.Add(new Knight() { Row = 7, Column = 6, IsBlack = false });
             Pieces.Add(new Rook() { Row = 7, Column = 7, IsBlack = false });
 
-            /*
+            
             for (var i = 0; i < 8; i++)
             {
                 Pieces.Add(new Pawn() { Row = 6, Column = i, IsBlack = false });
             }
-            */
+            
 
         }
 
@@ -208,13 +208,19 @@ namespace Chess
                             _pieceClicked = false;
                         }
                     }
+                    else
+                    {
+                        _pieceClicked = false;
+                        RestoreOriginalBoard(_allowedMoves);
+                    }
                 }
             }
             else _pieceClicked = false;
         }
 
 
-        //Def not a control
+        //Def not a control. This works. Tried doing the same thing ColorAllowedMoves and RestoreOrignialBoard does with data bindings but Tuples are weird with data bindings and then I tried making a generic type like shown https://stackoverflow.com/questions/4017714/binding-to-a-list-of-tuples
+        //This became an even bigger pain in the ass and now I have this ghetto control setup that works. Might try with data bindings again at a later stage.
         private void ColorAllowedMoves(List<Tuple<int, int>> allowedMoves)
         {
             if (allowedMoves.Count > 0)

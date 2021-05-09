@@ -49,7 +49,7 @@ namespace Chess
             switch (_currentPiece.GetType().Name)
             {
                 case "Pawn":
-                    return GeneratePawnMoves(piece, pieces);
+                    return GeneratePawnMoves((Pawn)piece, pieces);
 
                 case "Knight":
                     return GenerateKnightMoves(piece, pieces);
@@ -64,7 +64,7 @@ namespace Chess
                     return GenerateQueenMoves(piece, pieces);
 
                 case "King":
-                    return GenerateKingMoves(piece, pieces);
+                    return GenerateKingMoves((King)piece, pieces);
 
                 default:
                     _currentPiece.Move(7, 7);
@@ -89,7 +89,8 @@ namespace Chess
         }
 
 
-        //USELESS
+        //USELESS lel
+        /*
         public string CheckCaptureOrNotCapture(int desRow, int desCol, List<Tuple<int, int, string>> allowedMoves) {
 
             for (int i = 0; i < allowedMoves.Count(); i++)
@@ -101,6 +102,7 @@ namespace Chess
             }
             return null;
         }
+        */
 
 
         private List<Tuple<int, int>> GenerateRookMoves(ChessPiece piece, ObservableCollection<ChessPiece> pieces)
@@ -472,7 +474,7 @@ namespace Chess
             }
             return null;
         }
-        private List<Tuple<int, int>> GenerateKingMoves(ChessPiece piece, ObservableCollection<ChessPiece> pieces)
+        private List<Tuple<int, int>> GenerateKingMoves(King piece, ObservableCollection<ChessPiece> pieces)
         {
             return null;
         }
@@ -491,9 +493,158 @@ namespace Chess
 
             return queenMoves;
         }
-        private List<Tuple<int, int>> GeneratePawnMoves(ChessPiece piece, ObservableCollection<ChessPiece> pieces)
+        private List<Tuple<int, int>> GeneratePawnMoves(Pawn piece, ObservableCollection<ChessPiece> pieces)
         {
-            return null;
+            List<Tuple<int, int>> pawnMoves = new List<Tuple<int, int>>();
+
+            var currentRow = piece.Row;
+            var currentCol = piece.Column;
+            //Checks if this bad boy is black or white
+            switch (piece.IsBlack.ToString())
+            {
+                //Bleck
+                case "True":
+                    
+
+                    //CHECK F;rWARD
+                    if (!IsChessPieceHere(currentRow + 1, currentCol, pieces))
+                    {
+                        //PROOOOOMOTION
+                        if(currentRow + 1 == _maxRow)
+                        {
+
+                        }
+                        else
+                        {
+                            pawnMoves.Add(Tuple.Create(currentRow + 1, currentCol));
+                        }
+                    }
+
+                    //CHECK CAPTURE
+
+                    //RIGHT
+                    if(currentCol - 1 >= _minCol)
+                    {
+                        if (IsChessPieceHere(currentRow + 1, currentCol - 1, pieces) && FindPiece(currentRow + 1, currentCol - 1, pieces).IsBlack != piece.IsBlack)
+                        {
+                            //promotion
+                            if (currentRow + 1 == _maxRow)
+                            {
+                                pawnMoves.Add(Tuple.Create(currentRow + 1, currentCol - 1));
+                            }
+                            else
+                            {
+                                pawnMoves.Add(Tuple.Create(currentRow + 1, currentCol - 1));
+                            }
+                        }
+                    }
+
+                    //LEFT
+                    if (currentCol + 1 <= _maxCol)
+                    {
+                        if (IsChessPieceHere(currentRow + 1, currentCol + 1, pieces) && FindPiece(currentRow + 1, currentCol + 1, pieces).IsBlack != piece.IsBlack)
+                        {
+                            //PROOOOMOTION
+                            if (currentRow + 1 == _maxRow)
+                            {
+                                pawnMoves.Add(Tuple.Create(currentRow + 1, currentCol + 1));
+                            }
+                            else
+                            {
+                                pawnMoves.Add(Tuple.Create(currentRow + 1, currentCol + 1));
+                            }
+                        }
+                    }
+
+
+                    //EN PASSANT
+                    //GOES HERE
+
+
+
+                    //Check if BIG JUMP is enabled
+                    if(piece._movesDone == 0)
+                    {
+                        if(!IsChessPieceHere(currentRow + 2, currentCol, pieces)){
+                            pawnMoves.Add(Tuple.Create(currentRow + 2, currentCol));
+                        }
+                    }
+                    break;
+
+
+
+                //TITANIUM WHITE
+                case "False":
+
+                    //CHECK F;rWARD
+                    if (!IsChessPieceHere(currentRow - 1, currentCol, pieces))
+                    {
+                        //PROOOOOMOTION
+                        if (currentRow - 1 == _minRow)
+                        {
+
+                        }
+                        else
+                        {
+                            pawnMoves.Add(Tuple.Create(currentRow - 1, currentCol));
+                        }
+                    }
+
+                    //CHECK CAPTURE
+
+                    //LEFT
+                    if (currentCol - 1 >= _minCol)
+                    {
+                        if (IsChessPieceHere(currentRow - 1, currentCol - 1, pieces) && FindPiece(currentRow - 1, currentCol - 1, pieces).IsBlack != piece.IsBlack)
+                        {
+                            //PROMOTION
+                            if (currentRow - 1 == _minRow)
+                            {
+                                pawnMoves.Add(Tuple.Create(currentRow - 1, currentCol - 1));
+                            }
+                            else
+                            {
+                                pawnMoves.Add(Tuple.Create(currentRow - 1, currentCol - 1));
+                            }
+                        }
+                    }
+
+                    //RIGHT
+                    if (currentCol + 1 <= _maxCol)
+                    {
+                        if (IsChessPieceHere(currentRow - 1, currentCol + 1, pieces) && FindPiece(currentRow - 1, currentCol + 1, pieces).IsBlack != piece.IsBlack)
+                        {
+                            //PPPPPPROOOOOOMOTION. I dont have implement friend
+                            if (currentRow - 1 == _minRow)
+                            {
+                                pawnMoves.Add(Tuple.Create(currentRow - 1, currentCol + 1));
+                            }
+                            else
+                            {
+                                pawnMoves.Add(Tuple.Create(currentRow - 1, currentCol + 1));
+                            }
+                        }
+                    }
+
+
+                    //EN PASSANT
+
+
+
+                    //Check if BIG JUMP is enabled
+                    if (piece._movesDone == 0)
+                    {
+                        if (!IsChessPieceHere(currentRow - 2, currentCol, pieces))
+                        {
+                            pawnMoves.Add(Tuple.Create(currentRow - 2, currentCol));
+                        }
+                    }
+                    break;
+
+                default: return pawnMoves;
+            }
+            
+            return pawnMoves;
 
         }
     }  

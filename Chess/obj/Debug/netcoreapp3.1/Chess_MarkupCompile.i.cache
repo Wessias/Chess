@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\Hedda\Documents\GitHub\Checkers\Chess\obj\Debug\netcoreapp3.1\
+D:\Program (x86)\GitHub\Checkers\Chess\obj\Debug\netcoreapp3.1\
 Chess
 none
 false
-TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1;
-C:\Users\Hedda\Documents\GitHub\Checkers\Chess\App.xaml
+TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
+D:\Program (x86)\GitHub\Checkers\Chess\App.xaml
 11407045341
 
 13-868274011
-1961489183418
+1961164001210
 MainWindow.xaml;
 
 False

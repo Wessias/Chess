@@ -1,8 +1,8 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
-      "C:\\Users\\Hedda\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\Hedda\\.nuget\\packages"
+      "C:\\Users\\Regnd\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Regnd\\.nuget\\packages"
     ]
   }
 }
