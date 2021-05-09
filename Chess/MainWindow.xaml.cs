@@ -70,10 +70,12 @@ namespace Chess
             Pieces.Add(new Knight() { Row = 7, Column = 6, IsBlack = false });
             Pieces.Add(new Rook() { Row = 7, Column = 7, IsBlack = false });
 
+            /*
             for (var i = 0; i < 8; i++)
             {
                 Pieces.Add(new Pawn() { Row = 6, Column = i, IsBlack = false });
             }
+            */
 
         }
 
@@ -167,18 +169,22 @@ namespace Chess
                     {
                         _gameLogic._currentPiece = clickedPiece;
                         _allowedMoves = _gameLogic.GenerateAllowedMoves(clickedPiece, Pieces);
-                        _pieceClicked = true;
-                        ColorAllowedMoves(_allowedMoves);
-                        
+                        if (_allowedMoves.Count() != 0)
+                        {
+                            _pieceClicked = true;
+                            ColorAllowedMoves(_allowedMoves);
+                        }
 
                     }
                     else if (!_IsBlackTurn && !(clickedPiece.IsBlack)) //Redundant? BIATCH TRY REMOVING IT
                     {
                         _gameLogic._currentPiece = clickedPiece;
                         _allowedMoves = _gameLogic.GenerateAllowedMoves(clickedPiece, Pieces);
-                        _pieceClicked = true;
-                        ColorAllowedMoves(_allowedMoves);
-                        
+                        if(_allowedMoves.Count() != 0){
+                            _pieceClicked = true;
+                            ColorAllowedMoves(_allowedMoves);
+                        }
+
                     }
                 }
             }
