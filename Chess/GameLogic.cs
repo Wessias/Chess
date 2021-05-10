@@ -9,7 +9,6 @@ namespace Chess
     class GameLogic
     {
         public ChessPiece _currentPiece;
-        public Tuple<int, int> _desiredPos;
         private int _maxRow = 7;
         private int _maxCol = 7;
         private int _minRow = 0;
@@ -44,7 +43,7 @@ namespace Chess
 
 
 
-        public List<Tuple<int, int>> GenerateAllowedMoves(ChessPiece piece, ObservableCollection<ChessPiece> pieces)
+        public List<Tuple<int, int, string>> GenerateAllowedMoves(ChessPiece piece, ObservableCollection<ChessPiece> pieces)
         {
             switch (_currentPiece.GetType().Name)
             {
@@ -75,7 +74,7 @@ namespace Chess
         }
 
 
-        public bool CheckIfDesiredPosIsInAllowedMoves(int desRow, int desCol, List<Tuple<int, int>> allowedMoves)
+        public bool CheckIfDesiredPosIsInAllowedMoves(int desRow, int desCol, List<Tuple<int, int, string>> allowedMoves)
         {
 
             for (int i = 0; i < allowedMoves.Count(); i++)
@@ -105,9 +104,9 @@ namespace Chess
         */
 
 
-        private List<Tuple<int, int>> GenerateRookMoves(ChessPiece piece, ObservableCollection<ChessPiece> pieces)
+        private List<Tuple<int, int, string>> GenerateRookMoves(ChessPiece piece, ObservableCollection<ChessPiece> pieces)
         {
-            List<Tuple<int, int>> rookMoves = new List<Tuple<int, int>>();
+            List<Tuple<int, int, string>> rookMoves = new List<Tuple<int, int, string>>();
 
             for (int i = 0; i <= 4; i++)
             {
@@ -119,11 +118,11 @@ namespace Chess
                         {
                             if (!IsChessPieceHere(j, piece.Column, pieces))
                             {
-                                rookMoves.Add(Tuple.Create(j, piece.Column));
+                                rookMoves.Add(Tuple.Create(j, piece.Column, "normal"));
                             }
                             else if (FindPiece(j, piece.Column, pieces).IsBlack == !piece.IsBlack)
                             {
-                                rookMoves.Add(Tuple.Create(j, piece.Column));
+                                rookMoves.Add(Tuple.Create(j, piece.Column, "normal"));
                                 break;
                             }
                             else
@@ -139,11 +138,11 @@ namespace Chess
                         {
                             if (!IsChessPieceHere(j, piece.Column, pieces))
                             {
-                                rookMoves.Add(Tuple.Create(j, piece.Column));
+                                rookMoves.Add(Tuple.Create(j, piece.Column, "normal"));
                             }
                             else if (FindPiece(j, piece.Column, pieces).IsBlack == !piece.IsBlack)
                             {
-                                rookMoves.Add(Tuple.Create(j, piece.Column));
+                                rookMoves.Add(Tuple.Create(j, piece.Column, "normal"));
                                 break;
                             }
                             else
@@ -159,11 +158,11 @@ namespace Chess
                         {
                             if (!IsChessPieceHere(piece.Row, j, pieces))
                             {
-                                rookMoves.Add(Tuple.Create(piece.Row, j));
+                                rookMoves.Add(Tuple.Create(piece.Row, j, "normal"));
                             }
                             else if (FindPiece(piece.Row, j, pieces).IsBlack == !piece.IsBlack)
                             {
-                                rookMoves.Add(Tuple.Create(piece.Row, j));
+                                rookMoves.Add(Tuple.Create(piece.Row, j, "normal"));
                                 break;
                             }
                             else
@@ -180,11 +179,11 @@ namespace Chess
                         {
                             if (!IsChessPieceHere(piece.Row, j, pieces))
                             {
-                                rookMoves.Add(Tuple.Create(piece.Row, j));
+                                rookMoves.Add(Tuple.Create(piece.Row, j, "normal"));
                             }
                             else if (FindPiece(piece.Row, j, pieces).IsBlack == !piece.IsBlack)
                             {
-                                rookMoves.Add(Tuple.Create(piece.Row, j));
+                                rookMoves.Add(Tuple.Create(piece.Row, j, "normal"));
                                 break;
                             }
                             else
@@ -205,9 +204,9 @@ namespace Chess
             return rookMoves;
         }
 
-        private List<Tuple<int, int>> GenerateKnightMoves(ChessPiece piece, ObservableCollection<ChessPiece> pieces)
+        private List<Tuple<int, int, string>> GenerateKnightMoves(ChessPiece piece, ObservableCollection<ChessPiece> pieces)
         {
-            List<Tuple<int, int>> knightMoves = new List<Tuple<int, int>>();
+            List<Tuple<int, int, string>> knightMoves = new List<Tuple<int, int, string>>();
 
             for (int k = 0; k <= 4; k++)
             {
@@ -220,12 +219,12 @@ namespace Chess
                         {
                             if (!IsChessPieceHere(piece.Row - 2, piece.Column - 1, pieces))
                             {
-                                knightMoves.Add(Tuple.Create(piece.Row - 2, piece.Column - 1));
+                                knightMoves.Add(Tuple.Create(piece.Row - 2, piece.Column - 1, "normal"));
                                 
                             }
                             else if (FindPiece(piece.Row - 2, piece.Column - 1, pieces).IsBlack != piece.IsBlack)
                             {
-                                knightMoves.Add(Tuple.Create(piece.Row - 2, piece.Column - 1));
+                                knightMoves.Add(Tuple.Create(piece.Row - 2, piece.Column - 1, "normal"));
                                 
                             }
                         }
@@ -235,11 +234,11 @@ namespace Chess
                         {
                             if (!IsChessPieceHere(piece.Row - 1, piece.Column - 2, pieces))
                             {
-                                knightMoves.Add(Tuple.Create(piece.Row - 1, piece.Column - 2));
+                                knightMoves.Add(Tuple.Create(piece.Row - 1, piece.Column - 2, "normal"));
                             }
                             else if (FindPiece(piece.Row - 1, piece.Column - 2, pieces).IsBlack != piece.IsBlack)
                             {
-                                knightMoves.Add(Tuple.Create(piece.Row - 1, piece.Column - 2));
+                                knightMoves.Add(Tuple.Create(piece.Row - 1, piece.Column - 2, "normal"));
                             }
 
                         }
@@ -253,12 +252,12 @@ namespace Chess
                         {
                             if (!IsChessPieceHere(piece.Row - 2, piece.Column + 1, pieces))
                             {
-                                knightMoves.Add(Tuple.Create(piece.Row - 2, piece.Column + 1));
+                                knightMoves.Add(Tuple.Create(piece.Row - 2, piece.Column + 1, "normal"));
 
                             }
                             else if (FindPiece(piece.Row - 2, piece.Column + 1, pieces).IsBlack != piece.IsBlack)
                             {
-                                knightMoves.Add(Tuple.Create(piece.Row - 2, piece.Column + 1));
+                                knightMoves.Add(Tuple.Create(piece.Row - 2, piece.Column + 1, "normal"));
 
                             }
                         }
@@ -268,11 +267,11 @@ namespace Chess
                         {
                             if (!IsChessPieceHere(piece.Row - 1, piece.Column + 2, pieces))
                             {
-                                knightMoves.Add(Tuple.Create(piece.Row - 1, piece.Column + 2));
+                                knightMoves.Add(Tuple.Create(piece.Row - 1, piece.Column + 2, "normal"));
                             }
                             else if (FindPiece(piece.Row - 1, piece.Column + 2, pieces).IsBlack != piece.IsBlack)
                             {
-                                knightMoves.Add(Tuple.Create(piece.Row - 1, piece.Column + 2));
+                                knightMoves.Add(Tuple.Create(piece.Row - 1, piece.Column + 2, "normal"));
                             }
 
                         }
@@ -285,12 +284,12 @@ namespace Chess
                         {
                             if (!IsChessPieceHere(piece.Row + 2, piece.Column - 1, pieces))
                             {
-                                knightMoves.Add(Tuple.Create(piece.Row + 2, piece.Column - 1));
+                                knightMoves.Add(Tuple.Create(piece.Row + 2, piece.Column - 1, "normal"));
 
                             }
                             else if (FindPiece(piece.Row + 2, piece.Column - 1, pieces).IsBlack != piece.IsBlack)
                             {
-                                knightMoves.Add(Tuple.Create(piece.Row + 2, piece.Column - 1));
+                                knightMoves.Add(Tuple.Create(piece.Row + 2, piece.Column - 1, "normal"));
 
                             }
                         }
@@ -300,11 +299,11 @@ namespace Chess
                         {
                             if (!IsChessPieceHere(piece.Row + 1, piece.Column - 2, pieces))
                             {
-                                knightMoves.Add(Tuple.Create(piece.Row + 1, piece.Column - 2));
+                                knightMoves.Add(Tuple.Create(piece.Row + 1, piece.Column - 2, "normal"));
                             }
                             else if (FindPiece(piece.Row + 1, piece.Column - 2, pieces).IsBlack != piece.IsBlack)
                             {
-                                knightMoves.Add(Tuple.Create(piece.Row + 1, piece.Column - 2));
+                                knightMoves.Add(Tuple.Create(piece.Row + 1, piece.Column - 2, "normal"));
                             }
 
                         }
@@ -317,12 +316,12 @@ namespace Chess
                         {
                             if (!IsChessPieceHere(piece.Row + 2, piece.Column + 1, pieces))
                             {
-                                knightMoves.Add(Tuple.Create(piece.Row + 2, piece.Column + 1));
+                                knightMoves.Add(Tuple.Create(piece.Row + 2, piece.Column + 1, "normal"));
 
                             }
                             else if (FindPiece(piece.Row + 2, piece.Column + 1, pieces).IsBlack != piece.IsBlack)
                             {
-                                knightMoves.Add(Tuple.Create(piece.Row + 2, piece.Column + 1));
+                                knightMoves.Add(Tuple.Create(piece.Row + 2, piece.Column + 1, "normal"));
 
                             }
                         }
@@ -332,11 +331,11 @@ namespace Chess
                         {
                             if (!IsChessPieceHere(piece.Row + 1, piece.Column + 2, pieces))
                             {
-                                knightMoves.Add(Tuple.Create(piece.Row + 1, piece.Column + 2));
+                                knightMoves.Add(Tuple.Create(piece.Row + 1, piece.Column + 2, "normal"));
                             }
                             else if (FindPiece(piece.Row + 1, piece.Column + 2, pieces).IsBlack != piece.IsBlack)
                             {
-                                knightMoves.Add(Tuple.Create(piece.Row + 1, piece.Column + 2));
+                                knightMoves.Add(Tuple.Create(piece.Row + 1, piece.Column + 2, "normal"));
                             }
 
                         }
@@ -356,9 +355,9 @@ namespace Chess
 
 
 
-        private List<Tuple<int, int>> GenerateBishopMoves(ChessPiece piece, ObservableCollection<ChessPiece> pieces)
+        private List<Tuple<int, int, string>> GenerateBishopMoves(ChessPiece piece, ObservableCollection<ChessPiece> pieces)
         {
-            List<Tuple<int, int>> bishopMoves = new List<Tuple<int, int>>();
+            List<Tuple<int, int, string>> bishopMoves = new List<Tuple<int, int, string>>();
 
             for (int i = 0; i <= 4; i++)
             {
@@ -373,11 +372,11 @@ namespace Chess
                             {
                                 if (!IsChessPieceHere(j, k, pieces))
                                 {
-                                    bishopMoves.Add(Tuple.Create(j, k));
+                                    bishopMoves.Add(Tuple.Create(j, k, "normal"));
                                 }
                                 else if (FindPiece(j, k, pieces).IsBlack != piece.IsBlack)
                                 {
-                                    bishopMoves.Add(Tuple.Create(j, k));
+                                    bishopMoves.Add(Tuple.Create(j, k, "normal"));
                                 }
                                 else
                                 {
@@ -398,11 +397,11 @@ namespace Chess
                             {
                                 if (!IsChessPieceHere(j, k, pieces))
                                 {
-                                    bishopMoves.Add(Tuple.Create(j, k));
+                                    bishopMoves.Add(Tuple.Create(j, k, "normal"));
                                 }
                                 else if (FindPiece(j, k, pieces).IsBlack != piece.IsBlack)
                                 {
-                                    bishopMoves.Add(Tuple.Create(j, k));
+                                    bishopMoves.Add(Tuple.Create(j, k, "normal"));
                                 }
                                 else
                                 {
@@ -424,11 +423,11 @@ namespace Chess
                             {
                                 if (!IsChessPieceHere(j, k, pieces))
                                 {
-                                    bishopMoves.Add(Tuple.Create(j, k));
+                                    bishopMoves.Add(Tuple.Create(j, k, "normal"));
                                 }
                                 else if (FindPiece(j, k, pieces).IsBlack != piece.IsBlack)
                                 {
-                                    bishopMoves.Add(Tuple.Create(j, k));
+                                    bishopMoves.Add(Tuple.Create(j, k, "normal"));
                                 }
                                 else
                                 {
@@ -449,11 +448,11 @@ namespace Chess
                             {
                                 if (!IsChessPieceHere(j, k, pieces))
                                 {
-                                    bishopMoves.Add(Tuple.Create(j, k));
+                                    bishopMoves.Add(Tuple.Create(j, k, "normal"));
                                 }
                                 else if (FindPiece(j, k, pieces).IsBlack != piece.IsBlack)
                                 {
-                                    bishopMoves.Add(Tuple.Create(j, k));
+                                    bishopMoves.Add(Tuple.Create(j, k, "normal"));
                                 }
                                 else
                                 {
@@ -474,11 +473,11 @@ namespace Chess
             }
             return null;
         }
-        private List<Tuple<int, int>> GenerateKingMoves(King piece, ObservableCollection<ChessPiece> pieces)
+        private List<Tuple<int, int, string>> GenerateKingMoves(King piece, ObservableCollection<ChessPiece> pieces)
         {
             return null;
         }
-        private List<Tuple<int, int>> GenerateQueenMoves(ChessPiece piece, ObservableCollection<ChessPiece> pieces)
+        private List<Tuple<int, int, string>> GenerateQueenMoves(ChessPiece piece, ObservableCollection<ChessPiece> pieces)
         {
 
             var diagonal = GenerateBishopMoves(piece, pieces);
@@ -493,9 +492,9 @@ namespace Chess
 
             return queenMoves;
         }
-        private List<Tuple<int, int>> GeneratePawnMoves(Pawn piece, ObservableCollection<ChessPiece> pieces)
+        private List<Tuple<int, int, string>> GeneratePawnMoves(Pawn piece, ObservableCollection<ChessPiece> pieces)
         {
-            List<Tuple<int, int>> pawnMoves = new List<Tuple<int, int>>();
+            List<Tuple<int, int, string>> pawnMoves = new List<Tuple<int, int, string>>();
 
             var currentRow = piece.Row;
             var currentCol = piece.Column;
@@ -512,11 +511,11 @@ namespace Chess
                         //PROOOOOMOTION
                         if(currentRow + 1 == _maxRow)
                         {
-
+                            pawnMoves.Add(Tuple.Create(currentRow + 1, currentCol, "promotion"));
                         }
                         else
                         {
-                            pawnMoves.Add(Tuple.Create(currentRow + 1, currentCol));
+                            pawnMoves.Add(Tuple.Create(currentRow + 1, currentCol, "normal"));
                         }
                     }
 
@@ -530,11 +529,11 @@ namespace Chess
                             //promotion
                             if (currentRow + 1 == _maxRow)
                             {
-                                pawnMoves.Add(Tuple.Create(currentRow + 1, currentCol - 1));
+                                pawnMoves.Add(Tuple.Create(currentRow + 1, currentCol - 1, "promotion"));
                             }
                             else
                             {
-                                pawnMoves.Add(Tuple.Create(currentRow + 1, currentCol - 1));
+                                pawnMoves.Add(Tuple.Create(currentRow + 1, currentCol - 1, "normal"));
                             }
                         }
                     }
@@ -547,11 +546,11 @@ namespace Chess
                             //PROOOOMOTION
                             if (currentRow + 1 == _maxRow)
                             {
-                                pawnMoves.Add(Tuple.Create(currentRow + 1, currentCol + 1));
+                                pawnMoves.Add(Tuple.Create(currentRow + 1, currentCol + 1, "promotion"));
                             }
                             else
                             {
-                                pawnMoves.Add(Tuple.Create(currentRow + 1, currentCol + 1));
+                                pawnMoves.Add(Tuple.Create(currentRow + 1, currentCol + 1, "normal"));
                             }
                         }
                     }
@@ -559,14 +558,45 @@ namespace Chess
 
                     //EN PASSANT
                     //GOES HERE
+                    //EN PASSANT RIGHT (From black pawns POV)
+                    if (currentCol - 1 >= _minCol)
+                    {
+                        if (IsChessPieceHere(currentRow, currentCol - 1, pieces))
+                        {
+                            if (FindPiece(currentRow, currentCol - 1, pieces).GetType().Name == piece.GetType().Name && FindPiece(currentRow, currentCol - 1, pieces).IsBlack != piece.IsBlack)
+                            {
+                                Pawn pawn = (Pawn)FindPiece(currentRow, currentCol - 1, pieces);
+                                if (pawn._movesDone == 1)
+                                {
+                                    pawnMoves.Add(Tuple.Create(currentRow + 1, currentCol - 1, "en passant"));
+                                }
+                            }
+                        }
+                    }
+
+                    //En passant left
+                    if (currentCol + 1 <= _maxCol)
+                    {
+                        if (IsChessPieceHere(currentRow, currentCol + 1, pieces))
+                        {
+                            if (FindPiece(currentRow, currentCol + 1, pieces).GetType().Name == piece.GetType().Name && FindPiece(currentRow, currentCol + 1, pieces).IsBlack != piece.IsBlack)
+                            {
+                                Pawn pawn = (Pawn)FindPiece(currentRow, currentCol + 1, pieces);
+                                if (pawn._movesDone == 1)
+                                {
+                                    pawnMoves.Add(Tuple.Create(currentRow + 1, currentCol + 1, "en passant"));
+                                }
+                            }
+                        }
+                    }
 
 
 
                     //Check if BIG JUMP is enabled
-                    if(piece._movesDone == 0)
+                    if (piece._movesDone == 0)
                     {
                         if(!IsChessPieceHere(currentRow + 2, currentCol, pieces)){
-                            pawnMoves.Add(Tuple.Create(currentRow + 2, currentCol));
+                            pawnMoves.Add(Tuple.Create(currentRow + 2, currentCol, "normal"));
                         }
                     }
                     break;
@@ -582,11 +612,11 @@ namespace Chess
                         //PROOOOOMOTION
                         if (currentRow - 1 == _minRow)
                         {
-
+                            pawnMoves.Add(Tuple.Create(currentRow - 1, currentCol, "promotion"));
                         }
                         else
                         {
-                            pawnMoves.Add(Tuple.Create(currentRow - 1, currentCol));
+                            pawnMoves.Add(Tuple.Create(currentRow - 1, currentCol, "normal"));
                         }
                     }
 
@@ -600,11 +630,11 @@ namespace Chess
                             //PROMOTION
                             if (currentRow - 1 == _minRow)
                             {
-                                pawnMoves.Add(Tuple.Create(currentRow - 1, currentCol - 1));
+                                pawnMoves.Add(Tuple.Create(currentRow - 1, currentCol - 1, "promotion"));
                             }
                             else
                             {
-                                pawnMoves.Add(Tuple.Create(currentRow - 1, currentCol - 1));
+                                pawnMoves.Add(Tuple.Create(currentRow - 1, currentCol - 1, "normal"));
                             }
                         }
                     }
@@ -617,17 +647,51 @@ namespace Chess
                             //PPPPPPROOOOOOMOTION. I dont have implement friend
                             if (currentRow - 1 == _minRow)
                             {
-                                pawnMoves.Add(Tuple.Create(currentRow - 1, currentCol + 1));
+                                pawnMoves.Add(Tuple.Create(currentRow - 1, currentCol + 1, "promotion"));
                             }
                             else
                             {
-                                pawnMoves.Add(Tuple.Create(currentRow - 1, currentCol + 1));
+                                pawnMoves.Add(Tuple.Create(currentRow - 1, currentCol + 1, "normal"));
                             }
                         }
                     }
 
 
                     //EN PASSANT
+                    //My en passant shit isn't correct, en passant is only possible right after the pawn in question has moved up 2 spaces next to ur pawn, 
+                    //currently you can do it even if its not directly after the pawn jumps 2 positions. 
+                    //Simple fix is tracking the moves that are made in a list and checking if the most recent item added to the list has matching row and col to the pawn ur trying to en passant.
+                    //EN PASSANT left (From white pawns POV)
+                    if (currentCol - 1 >= _minCol)
+                    {
+                        if (IsChessPieceHere(currentRow, currentCol - 1, pieces))
+                        {
+                            if (FindPiece(currentRow, currentCol - 1, pieces).GetType().Name == piece.GetType().Name && FindPiece(currentRow, currentCol - 1, pieces).IsBlack != piece.IsBlack)
+                            {
+                                Pawn pawn = (Pawn)FindPiece(currentRow, currentCol - 1, pieces);
+                                if (pawn._movesDone == 1)
+                                {
+                                    pawnMoves.Add(Tuple.Create(currentRow - 1, currentCol - 1, "en passant"));
+                                }
+                            }
+                        }
+                    }
+
+                    //En passant right
+                    if (currentCol + 1 <= _maxCol)
+                    {
+                        if (IsChessPieceHere(currentRow, currentCol + 1, pieces))
+                        {
+                            if (FindPiece(currentRow, currentCol + 1, pieces).GetType().Name == piece.GetType().Name && FindPiece(currentRow, currentCol + 1, pieces).IsBlack != piece.IsBlack)
+                            {
+                                Pawn pawn = (Pawn)FindPiece(currentRow, currentCol + 1, pieces);
+                                if (pawn._movesDone == 1)
+                                {
+                                    pawnMoves.Add(Tuple.Create(currentRow - 1, currentCol + 1, "en passant"));
+                                }
+                            }
+                        }
+                    }
 
 
 
@@ -636,7 +700,7 @@ namespace Chess
                     {
                         if (!IsChessPieceHere(currentRow - 2, currentCol, pieces))
                         {
-                            pawnMoves.Add(Tuple.Create(currentRow - 2, currentCol));
+                            pawnMoves.Add(Tuple.Create(currentRow - 2, currentCol, "normal"));
                         }
                     }
                     break;
@@ -646,6 +710,18 @@ namespace Chess
             
             return pawnMoves;
 
+        }
+
+        public int FindIndexOfMoveInAllowedMoves(int desRow, int desCol, List<Tuple<int, int, string>> allowedMoves)
+        {
+            for (int i = 0; i < allowedMoves.Count(); i++)
+            {
+                if (desRow == allowedMoves[i].Item1 && desCol == allowedMoves[i].Item2)
+                {
+                    return i;
+                }
+            }
+            return 0;
         }
     }  
 }

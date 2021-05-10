@@ -24,7 +24,7 @@ namespace Chess
 
         ObservableCollection<ChessPiece> Pieces { get; set; }
         private bool _pieceClicked = false;
-        private List<Tuple<int, int>> _allowedMoves;
+        private List<Tuple<int, int, string>> _allowedMoves;
         private bool _IsBlackTurn = false;
         GameLogic _gameLogic = new GameLogic();
         
@@ -46,6 +46,7 @@ namespace Chess
         private void NewGame()
         {
             Pieces.Clear();
+            
             Pieces.Add(new Rook() { Row = 0, Column = 0, IsBlack = true });
             Pieces.Add(new Knight() { Row = 0, Column = 1, IsBlack = true });
             Pieces.Add(new Bishop() { Row = 0, Column = 2, IsBlack = true });
@@ -54,6 +55,7 @@ namespace Chess
             Pieces.Add(new Bishop() { Row = 0, Column = 5, IsBlack = true });
             Pieces.Add(new Knight() { Row = 0, Column = 6, IsBlack = true });
             Pieces.Add(new Rook() { Row = 0, Column = 7, IsBlack = true });
+            
 
             for (var i = 0; i < 8; i++)
             {
@@ -138,16 +140,54 @@ namespace Chess
                     var rowAndColArray = btnName.Split("_");
                     int desRow = Convert.ToInt32(rowAndColArray[1]);
                     int desCol = Convert.ToInt32(rowAndColArray[2]);
-                    _gameLogic._desiredPos = Tuple.Create(desRow, desCol);
                     _pieceClicked = false;
 
 
                     if (_gameLogic.CheckIfDesiredPosIsInAllowedMoves(desRow, desCol, _allowedMoves)) {
 
+                        switch (_allowedMoves[_gameLogic.FindIndexOfMoveInAllowedMoves(desRow, desCol, _allowedMoves)].Item3) {
+                            case "normal":
+
                                 _gameLogic._currentPiece.Move(desRow, desCol);
                                 RestoreOriginalBoard(_allowedMoves);
                                 _IsBlackTurn = !_IsBlackTurn;
-                               
+
+                                break;
+
+                            case "en passant":
+                                if (_gameLogic._currentPiece.IsBlack)
+                                {
+                                    _gameLogic._currentPiece.Move(desRow, desCol);
+                                    Pieces.Remove(_gameLogic.FindPiece(desRow - 1, desCol, Pieces));
+                                    RestoreOriginalBoard(_allowedMoves);
+                                    _IsBlackTurn = !_IsBlackTurn;
+                                }
+                                else
+                                {
+                                    _gameLogic._currentPiece.Move(desRow, desCol);
+                                    Pieces.Remove(_gameLogic.FindPiece(desRow + 1, desCol, Pieces));
+                                    RestoreOriginalBoard(_allowedMoves);
+                                    _IsBlackTurn = !_IsBlackTurn;
+                                }
+                                break;
+
+                            case "promotion":
+
+                                var isBlack = _gameLogic._currentPiece.IsBlack;
+                                Pieces.Remove(_gameLogic._currentPiece);
+                                Pieces.Add(new Queen { Column = desCol, Row = desRow, IsBlack = isBlack });
+                                RestoreOriginalBoard(_allowedMoves);
+                                _IsBlackTurn = !_IsBlackTurn;
+                                break;
+
+                            case "castleQueen":
+
+                                break;
+
+                            case "castleKing":
+
+                                break;
+                        }                              
                     }
                     else
                     {
@@ -197,15 +237,28 @@ namespace Chess
                     {
                         if (_gameLogic.CheckIfDesiredPosIsInAllowedMoves(secondClickedPiece.Row, secondClickedPiece.Column, _allowedMoves))
                         {
+                            var desRow = secondClickedPiece.Row;
+                            var desCol = secondClickedPiece.Column;
+                            switch (_allowedMoves[_gameLogic.FindIndexOfMoveInAllowedMoves(desRow, desCol, _allowedMoves)].Item3)
+                            {
+                                case "normal":
+                                    Pieces.Remove(secondClickedPiece);
+                                    RestoreOriginalBoard(_allowedMoves);
+                                    _gameLogic._currentPiece.Move(desRow, desCol);
+                                    _IsBlackTurn = !_IsBlackTurn;
+                                    _pieceClicked = false;
+                                    break;
 
-                            var tempRow = secondClickedPiece.Row;
-                            var tempCol = secondClickedPiece.Column;
+                                case "promotion":
+                                    var isBlack = _gameLogic._currentPiece.IsBlack;
+                                    Pieces.Remove(_gameLogic._currentPiece);
+                                    Pieces.Remove(secondClickedPiece);
+                                    Pieces.Add(new Queen { Column = desCol, Row = desRow, IsBlack = isBlack });
+                                    RestoreOriginalBoard(_allowedMoves);
+                                    _IsBlackTurn = !_IsBlackTurn;
 
-                            Pieces.Remove(secondClickedPiece);
-                            RestoreOriginalBoard(_allowedMoves);
-                            _gameLogic._currentPiece.Move(tempRow, tempCol);
-                            _IsBlackTurn = !_IsBlackTurn;
-                            _pieceClicked = false;
+                                    break;
+                            }
                         }
                     }
                     else
@@ -221,7 +274,7 @@ namespace Chess
 
         //Def not a control. This works. Tried doing the same thing ColorAllowedMoves and RestoreOrignialBoard does with data bindings but Tuples are weird with data bindings and then I tried making a generic type like shown https://stackoverflow.com/questions/4017714/binding-to-a-list-of-tuples
         //This became an even bigger pain in the ass and now I have this ghetto control setup that works. Might try with data bindings again at a later stage.
-        private void ColorAllowedMoves(List<Tuple<int, int>> allowedMoves)
+        private void ColorAllowedMoves(List<Tuple<int, int, string>> allowedMoves)
         {
             if (allowedMoves.Count > 0)
             {
@@ -236,7 +289,7 @@ namespace Chess
         }
 
 
-        private void RestoreOriginalBoard(List<Tuple<int, int>> allowedMoves)
+        private void RestoreOriginalBoard(List<Tuple<int, int, string>> allowedMoves)
         {
             var converter = new BrushConverter();
             var blackBrush = (Brush)converter.ConvertFromString("#b48762");
