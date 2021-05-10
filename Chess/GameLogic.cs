@@ -45,6 +45,8 @@ namespace Chess
 
         public List<Tuple<int, int, string>> GenerateAllowedMoves(ChessPiece piece, ObservableCollection<ChessPiece> pieces)
         {
+            
+
             switch (_currentPiece.GetType().Name)
             {
                 case "Pawn":
@@ -63,11 +65,26 @@ namespace Chess
                     return GenerateQueenMoves(piece, pieces);
 
                 case "King":
+
                     return GenerateKingMoves((King)piece, pieces);
 
                 default:
                     _currentPiece.Move(7, 7);
                     break;
+            }
+            var attackedPositions = new List<Tuple<int, int, string>>();
+
+            foreach (var enemyPiece in pieces)
+            {
+                if (enemyPiece.IsBlack != piece.IsBlack)
+                {
+                    var attackedPositionsByEnemyPiece = GenerateAllowedMoves(enemyPiece, pieces);
+
+                    foreach (var move in attackedPositionsByEnemyPiece)
+                    {
+                        attackedPositions.Add(move);
+                    }
+                }
             }
 
             return null;
@@ -475,7 +492,78 @@ namespace Chess
         }
         private List<Tuple<int, int, string>> GenerateKingMoves(King piece, ObservableCollection<ChessPiece> pieces)
         {
-            return null;
+            var kingMoves = new List<Tuple<int, int, string>>();
+
+            //North and south moves
+            for (int i = -1; i <=1; i++)
+            {
+                //North
+                if (piece.Row - 1 >= _minRow && piece.Column - i >= _minCol && piece.Column - i <= _maxCol)
+                {
+                    if(!IsChessPieceHere(piece.Row - 1, piece.Column - i, pieces))
+                    {
+                        kingMoves.Add(Tuple.Create(piece.Row - 1, piece.Column - i, "normal"));
+                    }
+                    else if (FindPiece(piece.Row - 1, piece.Column - i, pieces).IsBlack != piece.IsBlack)
+                    {
+                        kingMoves.Add(Tuple.Create(piece.Row - 1, piece.Column - i, "normal"));
+                    }
+                }
+
+                //South
+                if (piece.Row + 1 <= _maxRow && piece.Column - i >= _minCol && piece.Column - i <= _maxCol)
+                {
+                    if (!IsChessPieceHere(piece.Row + 1, piece.Column - i, pieces))
+                    {
+                        kingMoves.Add(Tuple.Create(piece.Row + 1, piece.Column - i, "normal"));
+                    }
+                    else if (FindPiece(piece.Row + 1, piece.Column - i, pieces).IsBlack != piece.IsBlack)
+                    {
+                        kingMoves.Add(Tuple.Create(piece.Row + 1, piece.Column - i, "normal"));
+                    }
+                }
+
+
+            }
+            //WEST and EAST
+            for (int i = 0; i < 1; i++)
+            {
+
+                //west
+                if (piece.Row - i >= _minRow && piece.Column - 1 >= _minCol)
+                {
+                    if (!IsChessPieceHere(piece.Row - i, piece.Column - 1, pieces))
+                    {
+                        kingMoves.Add(Tuple.Create(piece.Row - i, piece.Column - 1, "normal"));
+                    }
+                    else if (FindPiece(piece.Row - i, piece.Column - 1, pieces).IsBlack != piece.IsBlack)
+                    {
+                        kingMoves.Add(Tuple.Create(piece.Row - i, piece.Column - 1, "normal"));
+                    }
+                }
+
+                //east
+                if (piece.Row - i <= _maxRow && piece.Column + 1 <= _maxCol)
+                {
+                    if (!IsChessPieceHere(piece.Row - i, piece.Column + 1, pieces))
+                    {
+                        kingMoves.Add(Tuple.Create(piece.Row - i, piece.Column + 1, "normal"));
+                    }
+                    else if (FindPiece(piece.Row - i, piece.Column + 1, pieces).IsBlack != piece.IsBlack)
+                    {
+                        kingMoves.Add(Tuple.Create(piece.Row - i, piece.Column + 1, "normal"));
+                    }
+                }
+
+            }
+
+
+            //Castle Queenside
+
+            //Castle Kingside
+
+
+            return kingMoves;
         }
         private List<Tuple<int, int, string>> GenerateQueenMoves(ChessPiece piece, ObservableCollection<ChessPiece> pieces)
         {

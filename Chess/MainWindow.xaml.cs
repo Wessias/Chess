@@ -25,7 +25,7 @@ namespace Chess
         ObservableCollection<ChessPiece> Pieces { get; set; }
         private bool _pieceClicked = false;
         private List<Tuple<int, int, string>> _allowedMoves;
-        private bool _IsBlackTurn = false;
+        private bool _isBlackTurn = false;
         GameLogic _gameLogic = new GameLogic();
         
 
@@ -150,7 +150,7 @@ namespace Chess
 
                                 _gameLogic._currentPiece.Move(desRow, desCol);
                                 RestoreOriginalBoard(_allowedMoves);
-                                _IsBlackTurn = !_IsBlackTurn;
+                                _isBlackTurn = !_isBlackTurn;
 
                                 break;
 
@@ -160,14 +160,14 @@ namespace Chess
                                     _gameLogic._currentPiece.Move(desRow, desCol);
                                     Pieces.Remove(_gameLogic.FindPiece(desRow - 1, desCol, Pieces));
                                     RestoreOriginalBoard(_allowedMoves);
-                                    _IsBlackTurn = !_IsBlackTurn;
+                                    _isBlackTurn = !_isBlackTurn;
                                 }
                                 else
                                 {
                                     _gameLogic._currentPiece.Move(desRow, desCol);
                                     Pieces.Remove(_gameLogic.FindPiece(desRow + 1, desCol, Pieces));
                                     RestoreOriginalBoard(_allowedMoves);
-                                    _IsBlackTurn = !_IsBlackTurn;
+                                    _isBlackTurn = !_isBlackTurn;
                                 }
                                 break;
 
@@ -177,7 +177,7 @@ namespace Chess
                                 Pieces.Remove(_gameLogic._currentPiece);
                                 Pieces.Add(new Queen { Column = desCol, Row = desRow, IsBlack = isBlack });
                                 RestoreOriginalBoard(_allowedMoves);
-                                _IsBlackTurn = !_IsBlackTurn;
+                                _isBlackTurn = !_isBlackTurn;
                                 break;
 
                             case "castleQueen":
@@ -205,7 +205,7 @@ namespace Chess
                 if (e.Source is Image img)
                 {
                     ChessPiece clickedPiece = (ChessPiece)img.DataContext;
-                    if (_IsBlackTurn && clickedPiece.IsBlack)
+                    if (_isBlackTurn && clickedPiece.IsBlack)
                     {
                         _gameLogic._currentPiece = clickedPiece;
                         _allowedMoves = _gameLogic.GenerateAllowedMoves(clickedPiece, Pieces);
@@ -216,7 +216,7 @@ namespace Chess
                         }
 
                     }
-                    else if (!_IsBlackTurn && !(clickedPiece.IsBlack)) //Redundant? BIATCH TRY REMOVING IT
+                    else if (!_isBlackTurn && !(clickedPiece.IsBlack)) //Redundant? BIATCH TRY REMOVING IT
                     {
                         _gameLogic._currentPiece = clickedPiece;
                         _allowedMoves = _gameLogic.GenerateAllowedMoves(clickedPiece, Pieces);
@@ -245,7 +245,7 @@ namespace Chess
                                     Pieces.Remove(secondClickedPiece);
                                     RestoreOriginalBoard(_allowedMoves);
                                     _gameLogic._currentPiece.Move(desRow, desCol);
-                                    _IsBlackTurn = !_IsBlackTurn;
+                                    _isBlackTurn = !_isBlackTurn;
                                     _pieceClicked = false;
                                     break;
 
@@ -255,7 +255,7 @@ namespace Chess
                                     Pieces.Remove(secondClickedPiece);
                                     Pieces.Add(new Queen { Column = desCol, Row = desRow, IsBlack = isBlack });
                                     RestoreOriginalBoard(_allowedMoves);
-                                    _IsBlackTurn = !_IsBlackTurn;
+                                    _isBlackTurn = !_isBlackTurn;
 
                                     break;
                             }
