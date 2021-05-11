@@ -5,8 +5,18 @@ using System.Text;
 
 namespace Chess
 {
-    class ChessPiece : INotifyPropertyChanged { 
-    public bool IsBlack { get; set; }
+    //My friend this is my viewmodel.
+    class ChessPiece : INotifyPropertyChanged {
+
+        // This property change stuff my blessed brother is so that my view can get notification when property in here is update.
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public bool IsBlack { get; set; }
 
     public virtual void Move(int row, int col)
         {
@@ -25,6 +35,7 @@ namespace Chess
         }
     }
 
+    //Yes,yes brother this is a variabel of the datatype integer very useful, inshallah.
     private int _column;
     public int Column
     {
@@ -36,13 +47,8 @@ namespace Chess
         }
     }
 
-    public event PropertyChangedEventHandler PropertyChanged;
-
-    public virtual void OnPropertyChanged(string propertyName)
-    {
-        PropertyChangedEventHandler handler = PropertyChanged;
-        if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-    }
+        //My friend you are blessed by Allah, mashallah.
+    
 
     public string ImageSource
     {

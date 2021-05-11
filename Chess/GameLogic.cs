@@ -6,6 +6,7 @@ using System.Text;
 
 namespace Chess
 {
+    //More ghetto model
     class GameLogic
     {
         public ChessPiece _currentPiece;
@@ -15,7 +16,7 @@ namespace Chess
         private int _minCol = 0;
 
 
-
+        //Finds the piece at set row and col.
         public ChessPiece FindPiece(int row, int col, ObservableCollection<ChessPiece> pieces)
         {
             for (int i = 0; i < pieces.Count; i++)
@@ -28,6 +29,8 @@ namespace Chess
             return null;
         }
 
+
+        //You know what it do
         private bool IsChessPieceHere(int row, int col, ObservableCollection<ChessPiece> pieces)
         {
             for (int i = 0; i < pieces.Count; i++)
@@ -42,7 +45,7 @@ namespace Chess
         }
 
 
-
+        //It does what the name says hombre
         public List<Tuple<int, int, string>> GenerateAllowedMoves(ChessPiece piece, ObservableCollection<ChessPiece> pieces)
         {
             
@@ -74,7 +77,8 @@ namespace Chess
             }
 
 
-            //Not in use, was gonna use it to check that the king cant go into attacked squares and if he is in check.
+            //Not in use, was gonna use it to check that the king cant go into attacked squares and if he is in check, but alas I am lazy.
+            /*
             var attackedPositions = new List<Tuple<int, int, string>>();
 
             foreach (var enemyPiece in pieces)
@@ -89,11 +93,12 @@ namespace Chess
                     }
                 }
             }
+            */
 
             return null;
         }
 
-
+        //Does what the name would entail.
         public bool CheckIfDesiredPosIsInAllowedMoves(int desRow, int desCol, List<Tuple<int, int, string>> allowedMoves)
         {
 
@@ -124,6 +129,10 @@ namespace Chess
         */
 
 
+
+        //Generates the rook moves that are "allowed", "allowed" since I don't check for pins.
+        //For south and north it goes through all the rows until it meets a piece or meets the last square, if the piece is the opposite color it is captureable.
+        //For easth and west its the same as north and south except the columns.
         private List<Tuple<int, int, string>> GenerateRookMoves(ChessPiece piece, ObservableCollection<ChessPiece> pieces)
         {
             List<Tuple<int, int, string>> rookMoves = new List<Tuple<int, int, string>>();
@@ -224,6 +233,8 @@ namespace Chess
             return rookMoves;
         }
 
+
+        //This is monke code which just goes in all the directions and creates a "L". Read through it just now and figured out a way to make it cleaner but life isn't clean as Lincoln used to say.
         private List<Tuple<int, int, string>> GenerateKnightMoves(ChessPiece piece, ObservableCollection<ChessPiece> pieces)
         {
             List<Tuple<int, int, string>> knightMoves = new List<Tuple<int, int, string>>();
@@ -374,7 +385,8 @@ namespace Chess
 
 
 
-
+        //This method generates diagonalmovements for bishops, pretty self explanatory. 
+        //Code walkthrough of north west: bitch it goes up one then left one (top down view) as long as they're in the allowed range.
         private List<Tuple<int, int, string>> GenerateBishopMoves(ChessPiece piece, ObservableCollection<ChessPiece> pieces)
         {
             List<Tuple<int, int, string>> bishopMoves = new List<Tuple<int, int, string>>();
@@ -497,6 +509,9 @@ namespace Chess
             }
             return null;
         }
+
+        //This method suprisingly generates the king moves that are "allowed".
+        //checks all the squares around the king for captures and movement then checks if castling is allowed.
         private List<Tuple<int, int, string>> GenerateKingMoves(King piece, ObservableCollection<ChessPiece> pieces)
         {
             var kingMoves = new List<Tuple<int, int, string>>();
@@ -567,7 +582,7 @@ namespace Chess
             if(piece._movesDone == 0)
             {
 
-                    //Castle to da left
+                    //Castle to da left (top down view)
                     for (int i = 1; i < 5; i++)
                     {
                         if (i < 4 && IsChessPieceHere(piece.Row, piece.Column - i, pieces))
@@ -590,7 +605,7 @@ namespace Chess
 
                     for (int i = 1; i < 4; i++)
                 {
-                    //Castle to da right
+                    //Castle to da right (top down view)
                     if (i < 3 && IsChessPieceHere(piece.Row, piece.Column + i, pieces))
                     {
                         break;
@@ -619,6 +634,8 @@ namespace Chess
 
             return kingMoves;
         }
+
+        //As one could guess this method generates queen moves and does so by just adding up the bishop moves and the rook moves.
         private List<Tuple<int, int, string>> GenerateQueenMoves(ChessPiece piece, ObservableCollection<ChessPiece> pieces)
         {
 
@@ -634,6 +651,10 @@ namespace Chess
 
             return queenMoves;
         }
+
+        //If you call this method you might expect it to return all the allowed pawn moves. Jokes on you cause it doesn't, it returns all the allowed moves, except pins and en passant isn't correct.
+        //En passant is only supposed to be available right after the pawn you're trying to en passant has been moved 2 rows, but here you can do it as long as its moved 2 rows and done so in 1 move.
+        //Easy fix would be to track all the moves that are done and just check if the last one was made to the square you're trying to en passant but I am too lazy to copy paste 1 line of code 4 times so I will not implement it correctly.
         private List<Tuple<int, int, string>> GeneratePawnMoves(Pawn piece, ObservableCollection<ChessPiece> pieces)
         {
             List<Tuple<int, int, string>> pawnMoves = new List<Tuple<int, int, string>>();
@@ -854,6 +875,7 @@ namespace Chess
 
         }
 
+        //For the times when you need to find that move you really liked.
         public int FindIndexOfMoveInAllowedMoves(int desRow, int desCol, List<Tuple<int, int, string>> allowedMoves)
         {
             for (int i = 0; i < allowedMoves.Count(); i++)

@@ -22,11 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MvvmLight" Version="5.4.1.1" />
-    <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="ChessPieceImages\BlackBishop.png" />
     <Resource Include="ChessPieceImages\BlackKing.png" />
     <Resource Include="ChessPieceImages\BlackKnight.png" />
