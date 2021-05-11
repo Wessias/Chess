@@ -24,7 +24,7 @@ namespace Chess
     public partial class MainWindow : Window
     {
 
-        ObservableCollection<ChessPiece> Pieces { get; set; } //This is my hemmis who keeps all the pieces in his basement.
+        ObservableCollection<ChessPiece> Pieces { get; set; } //This is my hemmis who keeps all the pieces in his basement and makes sure they're tracked. The view data context is tied to this dude who keeps a bunch of pieces of the class ChessPiece inside of him whom are also watched closely.
         private bool _pieceClicked = false;
         private List<Tuple<int, int, string>> _allowedMoves;
         private bool _isBlackTurn = false;

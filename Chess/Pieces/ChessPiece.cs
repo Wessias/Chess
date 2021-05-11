@@ -8,6 +8,7 @@ namespace Chess
     //My friend this is my viewmodel.
     //This class communicates with the view in order to update the view when something in an instance of this class is changed with the help of the Observable collection in mainwindow.
     //Also where all the data of pieces is stored.
+    //Communicates through bindings in the XAML.
     class ChessPiece : INotifyPropertyChanged {
 
         // This property change stuff my blessed brother is so that my view can get notification when property in here is update.
