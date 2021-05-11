@@ -18,12 +18,13 @@ namespace Chess
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
-    /// Ghetto model lookin' ass
+    /// Ghetto model lookin' ass that acts as the board
+    /// Updates the viewmodel (ChessPiece) after the users inputs
     /// </summary>
     public partial class MainWindow : Window
     {
 
-        ObservableCollection<ChessPiece> Pieces { get; set; }
+        ObservableCollection<ChessPiece> Pieces { get; set; } //This is my hemmis who keeps all the pieces in his basement.
         private bool _pieceClicked = false;
         private List<Tuple<int, int, string>> _allowedMoves;
         private bool _isBlackTurn = false;

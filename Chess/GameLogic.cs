@@ -7,6 +7,8 @@ using System.Text;
 namespace Chess
 {
     //More ghetto model
+    //Helps MainWindow with the logic of what the ChessPiece properties are allowed to be set as.
+    //Also helps with finding where pieces are currently located.
     class GameLogic
     {
         public ChessPiece _currentPiece;
