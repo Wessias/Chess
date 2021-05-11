@@ -72,6 +72,9 @@ namespace Chess
                     _currentPiece.Move(7, 7);
                     break;
             }
+
+
+            //Not in use, was gonna use it to check that the king cant go into attacked squares and if he is in check.
             var attackedPositions = new List<Tuple<int, int, string>>();
 
             foreach (var enemyPiece in pieces)
@@ -394,6 +397,7 @@ namespace Chess
                                 else if (FindPiece(j, k, pieces).IsBlack != piece.IsBlack)
                                 {
                                     bishopMoves.Add(Tuple.Create(j, k, "normal"));
+                                    break;
                                 }
                                 else
                                 {
@@ -419,6 +423,7 @@ namespace Chess
                                 else if (FindPiece(j, k, pieces).IsBlack != piece.IsBlack)
                                 {
                                     bishopMoves.Add(Tuple.Create(j, k, "normal"));
+                                    break;
                                 }
                                 else
                                 {
@@ -445,6 +450,7 @@ namespace Chess
                                 else if (FindPiece(j, k, pieces).IsBlack != piece.IsBlack)
                                 {
                                     bishopMoves.Add(Tuple.Create(j, k, "normal"));
+                                    break;
                                 }
                                 else
                                 {
@@ -470,6 +476,7 @@ namespace Chess
                                 else if (FindPiece(j, k, pieces).IsBlack != piece.IsBlack)
                                 {
                                     bishopMoves.Add(Tuple.Create(j, k, "normal"));
+                                    break;
                                 }
                                 else
                                 {
@@ -557,10 +564,57 @@ namespace Chess
 
             }
 
+            if(piece._movesDone == 0)
+            {
 
-            //Castle Queenside
+                    //Castle to da left
+                    for (int i = 1; i < 5; i++)
+                    {
+                        if (i < 4 && IsChessPieceHere(piece.Row, piece.Column - i, pieces))
+                        {
+                            break;
+                        }
+                        else if (i == 4 && IsChessPieceHere(piece.Row, piece.Column - i, pieces))
+                        {
+                            if(FindPiece(piece.Row, piece.Column - i, pieces).GetType().Name == "Rook")
+                            {
+                                Rook rookKingWantsToHug = (Rook)FindPiece(piece.Row, piece.Column - i, pieces);
 
-            //Castle Kingside
+                                if (rookKingWantsToHug._movesDone == 0)
+                                {
+                                    kingMoves.Add(Tuple.Create(piece.Row, piece.Column - 2, "castleQueen"));
+                                }
+                            }
+                        }
+                    }
+
+                    for (int i = 1; i < 4; i++)
+                {
+                    //Castle to da right
+                    if (i < 3 && IsChessPieceHere(piece.Row, piece.Column + i, pieces))
+                    {
+                        break;
+                    }
+                    else if (i == 3 && IsChessPieceHere(piece.Row, piece.Column + i, pieces))
+                    {
+                        if (FindPiece(piece.Row, piece.Column + i, pieces).GetType().Name == "Rook")
+                        {
+                            Rook kingWantsToHuggies = (Rook)FindPiece(piece.Row, piece.Column + i, pieces);
+                            if (kingWantsToHuggies._movesDone == 0)
+                            {
+                                kingMoves.Add(Tuple.Create(piece.Row, piece.Column + 2, "castleKing"));
+                            }
+
+                        }
+                    }
+                }
+
+
+            }
+
+
+
+
 
 
             return kingMoves;

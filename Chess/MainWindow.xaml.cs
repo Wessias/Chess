@@ -48,12 +48,12 @@ namespace Chess
             Pieces.Clear();
             
             Pieces.Add(new Rook() { Row = 0, Column = 0, IsBlack = true });
-            Pieces.Add(new Knight() { Row = 0, Column = 1, IsBlack = true });
-            Pieces.Add(new Bishop() { Row = 0, Column = 2, IsBlack = true });
-            Pieces.Add(new Queen() { Row = 0, Column = 3, IsBlack = true });
+            //Pieces.Add(new Knight() { Row = 0, Column = 1, IsBlack = true });
+            //Pieces.Add(new Bishop() { Row = 0, Column = 2, IsBlack = true });
+            //Pieces.Add(new Queen() { Row = 0, Column = 3, IsBlack = true });
             Pieces.Add(new King() { Row = 0, Column = 4, IsBlack = true });
             Pieces.Add(new Bishop() { Row = 0, Column = 5, IsBlack = true });
-            Pieces.Add(new Knight() { Row = 0, Column = 6, IsBlack = true });
+            //Pieces.Add(new Knight() { Row = 0, Column = 6, IsBlack = true });
             Pieces.Add(new Rook() { Row = 0, Column = 7, IsBlack = true });
             
 
@@ -64,12 +64,12 @@ namespace Chess
 
 
             Pieces.Add(new Rook() { Row = 7, Column = 0, IsBlack = false });
-            Pieces.Add(new Knight() { Row = 7, Column = 1, IsBlack = false });
-            Pieces.Add(new Bishop() { Row = 7, Column = 2, IsBlack = false });
-            Pieces.Add(new Queen() { Row = 7, Column = 3, IsBlack = false });
+            //Pieces.Add(new Knight() { Row = 7, Column = 1, IsBlack = false });
+            //Pieces.Add(new Bishop() { Row = 7, Column = 2, IsBlack = false });
+            //Pieces.Add(new Queen() { Row = 7, Column = 3, IsBlack = false });
             Pieces.Add(new King() { Row = 7, Column = 4, IsBlack = false });
-            Pieces.Add(new Bishop() { Row = 7, Column = 5, IsBlack = false });
-            Pieces.Add(new Knight() { Row = 7, Column = 6, IsBlack = false });
+            //Pieces.Add(new Bishop() { Row = 7, Column = 5, IsBlack = false });
+            //Pieces.Add(new Knight() { Row = 7, Column = 6, IsBlack = false });
             Pieces.Add(new Rook() { Row = 7, Column = 7, IsBlack = false });
 
             
@@ -181,11 +181,17 @@ namespace Chess
                                 break;
 
                             case "castleQueen":
-
+                                _gameLogic._currentPiece.Move(desRow, desCol);
+                                _gameLogic.FindPiece(desRow, desCol - 2, Pieces).Move(desRow, desCol + 1);
+                                RestoreOriginalBoard(_allowedMoves);
+                                _isBlackTurn = !_isBlackTurn;
                                 break;
 
                             case "castleKing":
-
+                                _gameLogic._currentPiece.Move(desRow, desCol);
+                                _gameLogic.FindPiece(desRow, desCol + 1, Pieces).Move(desRow, desCol - 1);
+                                RestoreOriginalBoard(_allowedMoves);
+                                _isBlackTurn = !_isBlackTurn;
                                 break;
                         }                              
                     }

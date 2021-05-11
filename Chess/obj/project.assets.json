@@ -163,19 +163,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Regnd\\.nuget\\packages\\": {}
+    "C:\\Users\\viggo.wessner\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Program (x86)\\GitHub\\Checkers\\Chess\\Chess.csproj",
+      "projectUniqueName": "C:\\GitHub\\Checkers\\Chess\\Chess.csproj",
       "projectName": "Chess",
-      "projectPath": "D:\\Program (x86)\\GitHub\\Checkers\\Chess\\Chess.csproj",
-      "packagesPath": "C:\\Users\\Regnd\\.nuget\\packages\\",
-      "outputPath": "D:\\Program (x86)\\GitHub\\Checkers\\Chess\\obj\\",
+      "projectPath": "C:\\GitHub\\Checkers\\Chess\\Chess.csproj",
+      "packagesPath": "C:\\Users\\viggo.wessner\\.nuget\\packages\\",
+      "outputPath": "C:\\GitHub\\Checkers\\Chess\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Regnd\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\viggo.wessner\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -226,7 +226,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.408\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
       }
     }
   },
