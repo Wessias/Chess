@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Chess"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="450">
+        Title="MainWindow" Height="800" Width="800">
     <Window.Resources>
         <DataTemplate DataType="{x:Type local:ChessPiece}">
             <Image Source="{Binding ImageSource}" MouseLeftButtonDown="Image_MouseLeftButtonDown" />

@@ -301,7 +301,7 @@ namespace Chess
 
                     Button btn = (Button)ButtonGrid.FindName("A_" + allowedMoves[i].Item1.ToString() + "_" + allowedMoves[i].Item2.ToString());
                     btn.Background = Brushes.Red;
-                    btn.Opacity = 0.7;
+                    btn.Opacity = 0.8;
                 }
             }
         }
