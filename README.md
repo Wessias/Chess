@@ -1,1 +1,2 @@
-Implementation of chess in c#. Did this in high school in order to practice programming with a MVVM pattern.
+C# project from high school where I created a graphical chess program with drag and drop.
+Primarily did this to practice programming with a MVVM pattern as well as some other common design patterns.
