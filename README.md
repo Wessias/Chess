@@ -4,7 +4,7 @@ This is a graphical chess program I created during high school with drag-and-dro
 
 ## Features
 - Attempt at Drag-and-drop chess pieces
-- Shows allowed moves, en passant, pins, etc. is functional
+- Functional game logic of chess, en passant, pins, etc.
 - Graphical user interface (GUI)
 - Implements the MVVM pattern
 
