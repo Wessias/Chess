@@ -1,2 +1,14 @@
-C# project from high school where I created a graphical chess program with drag and drop.
-Primarily did this to practice programming with a MVVM pattern as well as some other common design patterns.
+# Chess Program (C#)
+
+This is a graphical chess program I created during high school with drag-and-drop functionality. It was primarily developed to practice programming with the MVVM pattern and other common design patterns.
+
+## Features
+- Drag-and-drop chess pieces 
+- Graphical user interface (GUI)
+- Implements the MVVM pattern
+
+## Preview
+
+<p align="center">
+  <img src="https://imgur.com/0FbE3Nk.gif" alt="Chess Program GIF" width="400" />
+</p>
